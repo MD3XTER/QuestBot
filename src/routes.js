@@ -1,5 +1,5 @@
 import { createStackNavigator, createSwitchNavigator } from "react-navigation";
-
+import Greeting from "./screens/App/Greeting";
 import Chat from "./screens/App/Chat";
 import AppLoadingScreen from "./screens/App/Chat/index";
 
@@ -10,10 +10,16 @@ const AppStack = createStackNavigator(
       navigationOptions: () => ({
         header: null
       }),
+    },
+    Greeting: {
+      screen: Greeting,
+      navigationOptions: () => ({
+        header: null
+      })
     }
   },
   {
-    initialRouteName: "Chat",
+    initialRouteName: "Greeting",
   }
 );
 
