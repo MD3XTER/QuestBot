@@ -1,40 +1,33 @@
-import React from "react";
-import { View, Text } from "react-native";
+import React, { Component } from "react";
+import { View } from "react-native";
+import { connect } from "react-redux";
 import ChatBot from "react-native-chatbot";
 
-const triggerAlert = () => {
-  alert("Hello Arminda");
-  return "3"
-};
+import { getSteps } from "../../../utils"
 
-function Chat() {
-  const steps = [
-    {
-      id: "1",
-      message: "What is your name?",
-      trigger: "2"
-    },
-    {
-      id: "2",
-      user: true,
-      trigger: triggerAlert
-    },
-    {
-      id: "3",
-      message: "Hello Max",
-      end: true
-    },
-  ];
+import styles from "./styles";
 
-  return (
-    <View>
-      <ChatBot
-        style={{ height: "70%" }}
-        steps={steps}
-        botAvatar={"https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png"}
-      />
-    </View>
-  );
+class Chat extends Component {
+  render () {
+    return (
+      <View>
+        <ChatBot
+          style={{}}
+          steps={getSteps()}
+          botAvatar={
+            "https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png"
+          }
+        />
+      </View>
+    );
+  }
 }
 
-export default Chat;
+const mapStateToProps = ({ app }) => {
+  return { steps: app.steps };
+};
+
+export default connect(
+  mapStateToProps,
+  {}
+)(Chat);

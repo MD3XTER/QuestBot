@@ -7,6 +7,9 @@ const AppStack = createStackNavigator(
   {
     Chat: {
       screen: Chat,
+      navigationOptions: () => ({
+        header: null
+      }),
     }
   },
   {
