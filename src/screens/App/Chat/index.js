@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { connect } from "react-redux";
 import ChatBot from "react-native-chatbot";
 
-import { getSteps } from "../../../utils"
+import { getSteps, getClosedQuestions } from "../../../utils"
 
 import styles from "./styles";
 
@@ -13,7 +13,7 @@ class Chat extends Component {
       <View>
         <ChatBot
           style={{}}
-          steps={getSteps()}
+          steps={getClosedQuestions()}
           botAvatar={
             "https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png"
           }
