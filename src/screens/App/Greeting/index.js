@@ -13,7 +13,7 @@ const redirect = () => {
 class Greeting extends Component {
   render () {
     return (
-      <View style={styles.container}>
+      <View style={styles.greetingContainer}>
         <Image style={styles.image} source={{uri: 'https://facebook.github.io/react/logo-og.png'}} />
         <Text style={styles.greetingText} >
           Welcome to our app bro!
