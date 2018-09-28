@@ -1,4 +1,4 @@
-import response from "./response"
+import response from "./response";
 
 export const getStepsFromQuestionnaire = () => {
   console.log(response);
@@ -72,12 +72,16 @@ export const getClosedQuestions = () => {
       trigger: "2"
     },
     {
-      id: '2',
+      id: "2",
       options: [
-        { value: currentOption, label: getOption(), trigger: '3' },
-        { value: currentOption, label: getOption(), trigger: '3' },
-        { value: currentOption, label: getOption(), trigger: '3' },
+        { value: currentOption, label: getOption(), trigger: "3" },
+        { value: currentOption, label: getOption(), trigger: "3" },
+        { value: currentOption, label: getOption(), trigger: "3" }
       ],
+      // { This is for stopping the program, need to put this in the main operation
+      waitAction: quitSurvey(),
+      triggerNextStep: ({ value: currentOption, trigger: "3"})
+      // }
     },
     {
       id: "3",
@@ -86,12 +90,12 @@ export const getClosedQuestions = () => {
     }
   ];
 
-  function getOption(){
+  function getOption() {
     currentOption++;
     return "insert option" + currentOption;
   }
 
-  function getChosenOption({ previousValue, steps }){
+  function getChosenOption({ previousValue, steps }) {
     storeValue = previousValue;
 
     allValues.push(storeValue);
@@ -101,9 +105,43 @@ export const getClosedQuestions = () => {
     return "";
   }
 
-  function getChosenQuestion(){
+  function getChosenQuestion() {
     return "insert question : what's up?";
+  }
+// this function is needed to check if user inputs STOP then trigger the option to stop, THIS SHOULDN't BE HERE BUT FOR NOW.
+  function quitSurvey(stopStr,nextStep, currentOption) {
+    if (stopStr.equals("STOP")){
+      getQuit(nextStep, currentOption)
+    }
   }
 
   return steps;
 };
+// steps to stop the program
+export const getQuit = (nextStep, currentOption) => {
+  const steps = [
+    {
+      id: "1",
+      message: "Are you sure you want to STOP",
+      user: true,
+      options: [
+        { value: 1, label: "Do you need to go?", trigger: "2" },
+        { value: 2, label: "Wanna keep talking?", trigger: "3" }
+      ]
+    },
+    {
+      id: "2",
+      message: "Yay, okay my next question is... ",
+      triggerNextStep: ({ value: currentOption, trigger: nextStep})
+    },
+    {
+      id: "3",
+      message: "Okay good bye, hope to talk to you someday again",
+      // main switch is needed to end the program
+      end: true
+    }
+  ];
+
+  return steps;
+};
+
