@@ -3,16 +3,16 @@ import { View } from "react-native";
 import { connect } from "react-redux";
 import ChatBot from "react-native-chatbot";
 
-import { getSteps } from "../../../utils"
+import { getSteps, getStepsFromQuestionnaire } from "../../../utils"
 
 import styles from "./styles";
 
 class Chat extends Component {
   render () {
+    getStepsFromQuestionnaire();
     return (
       <View>
         <ChatBot
-          style={{}}
           steps={getSteps()}
           botAvatar={
             "https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png"
