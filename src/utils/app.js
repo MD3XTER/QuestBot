@@ -1,24 +1,63 @@
-export const getSteps = () => {
-  const steps = [
-    {
-      id: "1",
-      message: "What is your name?",
-      trigger: "2"
-    },
-    {
-      id: "2",
-      message: "hekki",
-      // user: true,
-      trigger: "3"
-    },
-    {
-      id: "3",
-      message: "Hello Max",
-      end: true
+import response from "./response"
+
+export const getStepsFromQuestionnaire = () => {
+  console.log(response);
+
+  let questions = [];
+  response.pages.map((page) => {
+    page.elements.map((element) => {
+      const question = {
+        label: ""
+      };
+      if (element.type === "question_open" || element.type === "question_closed") {
+        question.label = element.label;
+        questions.push(question);
+      }
+      if (element.type === "question_closed") {
+
+      }
+    });
+  });
+
+  let steps = [];
+  let stepIndex = 1;
+  questions.map((question, index) => {
+    const questionStep = {
+      id: `${stepIndex}`,
+      message: question.label,
+    };
+
+    if (index < questions.length) {
+      questionStep["trigger"] = `${stepIndex+1}`;
     }
-  ];
+
+    stepIndex++;
+
+    const answerStep = {
+      id: `${stepIndex}`,
+      user: true
+    };
+
+    if (index < questions.length-1) {
+      answerStep["trigger"] = `${stepIndex+1}`;
+      stepIndex++;
+    }
+    else {
+      answerStep["end"] = true;
+    }
+
+    steps.push(questionStep);
+    steps.push(answerStep);
+  });
+
+  console.log(questions);
+  console.log(steps);
 
   return steps;
+};
+
+const getCloseQuestion = (element) => {
+
 };
 
 export const getClosedQuestions = () => {
@@ -68,4 +107,3 @@ export const getClosedQuestions = () => {
 
   return steps;
 };
-

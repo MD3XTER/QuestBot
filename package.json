@@ -29,7 +29,7 @@
     "babel-jest": "23.6.0",
     "jest": "23.6.0",
     "prettier": "^1.14.2",
-    "metro-react-native-babel-preset": "0.47.0",
+    "metro-react-native-babel-preset": "0.45.3",
     "react-test-renderer": "16.5.0"
   },
   "jest": {
