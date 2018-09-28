@@ -1,57 +1,51 @@
 import response from "./response"
 
-export const getSteps = () => {
-  const steps = [
-    {
-      id: "1",
-      message: "What is your name?",
-      trigger: "2"
-    },
-    {
-      id: "2",
-      message: "hekki",
-      // user: true,
-      trigger: "3"
-    },
-    {
-      id: "3",
-      message: "Hello Max",
-      end: true
-    }
-  ];
-
-  return steps;
-};
-
 export const getStepsFromQuestionnaire = () => {
   console.log(response);
 
-  let steps = [];
-  steps.push(response.pages.map((page, index) => {
-
-  }));
-
-  page.elements.map((element, index) => {
-    if (element.type === "question_open" || element.type === "question_closed") {
-      const step = {
-        id: `${steps.length+1}`,
-        message: element.label,
-      };
-
-      if (index < page.elements.length-1) {
-        step["trigger"] = index+1;
+  let questions = [];
+  response.pages.map((page) => {
+    page.elements.map((element) => {
+      if (element.type === "question_open" || element.type === "question_closed") {
+        questions.push(element.label);
       }
-      else {
-        step["end"] = true;
-      }
-
-      steps.push(step);
-    }
+    });
   });
 
+  let steps = [];
+  let stepIndex = 1;
+  questions.map((question, index) => {
+    const questionStep = {
+      id: `${stepIndex}`,
+      message: question,
+    };
 
-    console.log(steps);
+    if (index < questions.length) {
+      questionStep["trigger"] = `${stepIndex+1}`;
+    }
 
+    stepIndex++;
+
+    const answerStep = {
+      id: `${stepIndex}`,
+      user: true
+    };
+
+    if (index < questions.length-1) {
+      answerStep["trigger"] = `${stepIndex+1}`;
+      stepIndex++;
+    }
+    else {
+      answerStep["end"] = true;
+    }
+
+    steps.push(questionStep);
+    steps.push(answerStep);
+  });
+
+  console.log(steps);
+
+  return steps;
 };
 
 export const getClosedQuestions = () => {
