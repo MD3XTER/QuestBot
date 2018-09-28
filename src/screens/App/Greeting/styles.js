@@ -14,14 +14,12 @@ export default styles = StyleSheet.create({
     textAlign: 'center',
   },
   continueButton: {
-    flex: 1,
     backgroundColor: 'black',
-    marginTop: 10,
     paddingTop: 15,
     paddingBottom: 15,
-    marginLeft: 30,
-    marginRight: 30,
-    borderRadius: 10,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
     borderWidth: 1,
   }
 });
