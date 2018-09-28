@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
- container : {
-
- }
+thankYouContainer: {
+  flex: 1
+}
 });

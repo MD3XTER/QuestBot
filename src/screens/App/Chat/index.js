@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { View } from "react-native";
+import { View, Text, Image} from "react-native";
 import { connect } from "react-redux";
 import ChatBot from "react-native-chatbot";
 
-import { getSteps, getStepsFromQuestionnaire } from "../../../utils"
-
 import styles from "./styles";
+import { getSteps, getStepsFromQuestionnaire } from "../../../utils"
 
 class Chat extends Component {
   render () {
@@ -18,6 +17,8 @@ class Chat extends Component {
             "https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png"
           }
         />
+      <View style={styles.container}>
+        <ChatBot steps={}/>
       </View>
     );
   }
