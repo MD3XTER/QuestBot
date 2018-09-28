@@ -1,56 +1,62 @@
 import response from "./response";
 
-export const getSteps = () => {
-  const steps = [
-    {
-      id: "1",
-      message: "What is your name?",
-      trigger: "2"
-    },
-    {
-      id: "2",
-      message: "hekki",
-      // user: true,
-      trigger: "3"
-    },
-    {
-      id: "3",
-      message: "Hello Max",
-      end: true
+export const getStepsFromQuestionnaire = () => {
+  console.log(response);
+
+  let questions = [];
+  response.pages.map((page) => {
+    page.elements.map((element) => {
+      const question = {
+        label: ""
+      };
+      if (element.type === "question_open" || element.type === "question_closed") {
+        question.label = element.label;
+        questions.push(question);
+      }
+      if (element.type === "question_closed") {
+
+      }
+    });
+  });
+
+  let steps = [];
+  let stepIndex = 1;
+  questions.map((question, index) => {
+    const questionStep = {
+      id: `${stepIndex}`,
+      message: question.label,
+    };
+
+    if (index < questions.length) {
+      questionStep["trigger"] = `${stepIndex+1}`;
     }
-  ];
+
+    stepIndex++;
+
+    const answerStep = {
+      id: `${stepIndex}`,
+      user: true
+    };
+
+    if (index < questions.length-1) {
+      answerStep["trigger"] = `${stepIndex+1}`;
+      stepIndex++;
+    }
+    else {
+      answerStep["end"] = true;
+    }
+
+    steps.push(questionStep);
+    steps.push(answerStep);
+  });
+
+  console.log(questions);
+  console.log(steps);
 
   return steps;
 };
 
-export const getStepsFromQuestionnaire = () => {
-  console.log(response);
-
-  let steps = [];
-  steps.push(response.pages.map((page, index) => {
-
-  }));
-
-  page.elements.map((element, index) => {
-    if (element.type === "question_open" || element.type === "question_closed") {
-      const step = {
-        id: `${steps.length + 1}`,
-        message: element.label
-      };
-
-      if (index < page.elements.length - 1) {
-        step["trigger"] = index + 1;
-      }
-      else {
-        step["end"] = true;
-      }
-
-      steps.push(step);
-    }
-  });
-
-
-  console.log(steps);
+const getCloseQuestion = (element) => {
 
 };
 

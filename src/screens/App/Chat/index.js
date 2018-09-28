@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, Image} from "react-native";
+import { View } from "react-native";
 import { connect } from "react-redux";
 import ChatBot from "react-native-chatbot";
 
@@ -8,17 +8,24 @@ import { getSteps, getStepsFromQuestionnaire } from "../../../utils";
 
 class Chat extends Component {
   render () {
-    const steps = getStepsFromQuestionnaire();
+   getStepsFromQuestionnaire();
+   // const steps = getStepsFromQuestionnaire();
+
+    const steps = [
+      {
+        id: "1",
+        message: "test",
+        end: true
+      }
+    ];
 
     return (
-      <View>
-        <ChatBot
-          steps={steps}
-          botAvatar={
-            "https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png"
-          }
-        />
-      </View>
+      <ChatBot
+        steps={steps}
+        botAvatar={
+          "https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png"
+        }
+      />
     );
   }
 }
