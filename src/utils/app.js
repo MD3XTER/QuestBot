@@ -6,8 +6,15 @@ export const getStepsFromQuestionnaire = () => {
   let questions = [];
   response.pages.map((page) => {
     page.elements.map((element) => {
+      const question = {
+        label: ""
+      };
       if (element.type === "question_open" || element.type === "question_closed") {
-        questions.push(element.label);
+        question.label = element.label;
+        questions.push(question);
+      }
+      if (element.type === "question_closed") {
+
       }
     });
   });
@@ -17,7 +24,7 @@ export const getStepsFromQuestionnaire = () => {
   questions.map((question, index) => {
     const questionStep = {
       id: `${stepIndex}`,
-      message: question,
+      message: question.label,
     };
 
     if (index < questions.length) {
@@ -43,9 +50,14 @@ export const getStepsFromQuestionnaire = () => {
     steps.push(answerStep);
   });
 
+  console.log(questions);
   console.log(steps);
 
   return steps;
+};
+
+const getCloseQuestion = (element) => {
+
 };
 
 export const getClosedQuestions = () => {

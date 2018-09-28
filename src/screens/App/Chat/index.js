@@ -8,8 +8,16 @@ import { getSteps, getStepsFromQuestionnaire } from "../../../utils";
 
 class Chat extends Component {
   render () {
-   const steps = getStepsFromQuestionnaire();
-   // const steps = getSteps();
+   getStepsFromQuestionnaire();
+   // const steps = getStepsFromQuestionnaire();
+
+    const steps = [
+      {
+        id: "1",
+        message: "test",
+        end: true
+      }
+    ];
 
     return (
       <ChatBot
