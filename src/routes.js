@@ -19,7 +19,7 @@ const AppStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: "Greeting",
+    initialRouteName: "Chat",
   }
 );
 

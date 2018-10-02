@@ -3,59 +3,35 @@ import response from "./response";
 export const getStepsFromQuestionnaire = () => {
   console.log(response);
 
-  let questions = [];
-  response.pages.map((page) => {
-    page.elements.map((element) => {
-      const question = {
-        label: ""
-      };
-
-      if (element.type !== "question_open" && element.type !== "question_closed") {
-        return
-      }
-
-      question.label = element.label;
-
-      if (element.type === "question_closed") {
-        question["options"] = getCloseQuestion(element);
-      }
-
-      questions.push(question);
-    });
-  });
+  const questions = getQuestions(response.pages);
 
   let steps = [];
   let stepIndex = 1;
+
   questions.map((question, index) => {
-    const questionStep = {
-      id: `${stepIndex}`,=
-    };
+    let nextStepID = getNextStepID(index, questions.length, stepIndex);
+
+    let stepQuestion;
+
+    stepQuestion = getStepOpenQuestion(stepIndex, question.label, nextStepID);
+
+    steps.push(stepQuestion);
+    stepIndex++;
+    nextStepID = getNextStepID(index, questions.length, stepIndex);
 
     if (question.options) {
-      questionStep["options"] = question.options;
-    }
-    else if (index < questions.length) {
-      questionStep["message"] = question.label;
-      questionStep["trigger"] = `${stepIndex+1}`;
-    }
+      stepQuestion = getStepCloseQuestion(stepIndex, question.options);
 
-    stepIndex++;
-
-    const answerStep = {
-      id: `${stepIndex}`,
-      user: true
-    };
-
-    if (index < questions.length-1) {
-      answerStep["trigger"] = `${stepIndex+1}`;
+      steps.push(stepQuestion);
       stepIndex++;
     }
     else {
-      answerStep["end"] = true;
+      const answer = getStepAnswer(stepIndex, nextStepID);
+
+      steps.push(answer);
+      stepIndex++;
     }
 
-    steps.push(questionStep);
-    steps.push(answerStep);
   });
 
   console.log(questions);
@@ -64,13 +40,84 @@ export const getStepsFromQuestionnaire = () => {
   return steps;
 };
 
-const getCloseQuestion = (element) => {
+const getNextStepID = (questionIndex, questionsLength, currentStepIndex) => {
+  return questionIndex === questionsLength-1 ? false : currentStepIndex+1;
+
+};
+
+const getQuestions = (pages) => {
+  let questions = [];
+
+  pages.map((page) => {
+    page.elements.map((element) => {
+      const question = {};
+
+      if (element.type === "question_open") {
+        question["label"] = element.label;
+      }
+      else if (element.type === "question_closed") {
+        question["label"] = element.label;
+        question["options"] = getElementCloseQuestionOptions(element.optionGroup, 1);
+      }
+      else {
+        return false;
+      }
+
+      questions.push(question);
+    });
+  });
+
+  return questions;
+};
+
+const getStepOpenQuestion = (id, label, nextElementID) => {
+  const step = {
+    id: `${id}`,
+    message: label,
+  };
+
+  if (nextElementID) {
+    step["trigger"] = `${nextElementID}`;
+  }
+  else {
+    step["end"] = true;
+  }
+
+  return step;
+};
+
+const getStepCloseQuestion = (id, options) => {
+  const step = {
+    id: `${id}`,
+    options
+  };
+
+  return step;
+};
+
+const getStepAnswer = (id, nextElementID) => {
+  const step = {
+    id: `${id}`,
+    user: true
+  };
+
+  if (nextElementID) {
+    step["trigger"] = `${nextElementID}`;
+  }
+  else {
+    step["end"] = true;
+  }
+
+  return step;
+};
+
+const getElementCloseQuestionOptions = (optionGroup, nextElementID) => {
   const options = [];
-  element.optionGroup.options.map((elementOption) => {
+  optionGroup.options.map((elementOption) => {
     const option = {
       value: elementOption.value,
       label: elementOption.label,
-      trigger: "1",
+      trigger: `${nextElementID}`,
     };
 
     options.push(option);

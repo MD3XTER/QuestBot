@@ -7,9 +7,11 @@ import styles from "./styles";
 import { getSteps, getStepsFromQuestionnaire } from "../../../utils";
 
 class Chat extends Component {
-  render () {
-   // getStepsFromQuestionnaire();
+  state = {
+    steps: []
+  };
 
+  componentWillMount() {
     let steps = [
       {
         id: "1",
@@ -19,6 +21,12 @@ class Chat extends Component {
     ];
 
     steps = getStepsFromQuestionnaire();
+
+    this.setState({ steps });
+  }
+
+  render () {
+    const { steps } = this.state;
 
     return (
       <ChatBot
