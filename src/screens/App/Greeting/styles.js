@@ -3,13 +3,18 @@ import { StyleSheet } from "react-native";
 export default styles = StyleSheet.create({
   greetingContainer: {
     flex: 1,
-    backgroundColor: 'yellow'
+    backgroundColor: 'yellow',
+    alignItems: "center",
+    justifyContent: "center"
   },
   image: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
     height: 300
   },
   greetingText: {
-    backgroundColor: 'white',
+    fontSize: 24,
     margin: 30,
     textAlign: 'center',
   },
@@ -21,5 +26,7 @@ export default styles = StyleSheet.create({
     height: 100,
     borderRadius: 50,
     borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
