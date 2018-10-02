@@ -10,7 +10,7 @@ class Greeting extends Component {
   render () {
     return (
       <View style={styles.greetingContainer}>
-        <Image style={styles.image} source={{uri: 'https://facebook.github.io/react/logo-og.png'}} />
+        <Image style={styles.image} source={require('../../../images/dogo.jpg')} />
         <Text style={styles.greetingText} >
           Welcome to our app bro!
           Here you can like answer questions and shit
