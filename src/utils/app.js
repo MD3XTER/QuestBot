@@ -9,13 +9,18 @@ export const getStepsFromQuestionnaire = () => {
       const question = {
         label: ""
       };
-      if (element.type === "question_open" || element.type === "question_closed") {
-        question.label = element.label;
-        questions.push(question);
-      }
-      if (element.type === "question_closed") {
 
+      if (element.type !== "question_open" && element.type !== "question_closed") {
+        return
       }
+
+      question.label = element.label;
+
+      if (element.type === "question_closed") {
+        question["options"] = getCloseQuestion(element);
+      }
+
+      questions.push(question);
     });
   });
 
@@ -23,11 +28,14 @@ export const getStepsFromQuestionnaire = () => {
   let stepIndex = 1;
   questions.map((question, index) => {
     const questionStep = {
-      id: `${stepIndex}`,
-      message: question.label,
+      id: `${stepIndex}`,=
     };
 
-    if (index < questions.length) {
+    if (question.options) {
+      questionStep["options"] = question.options;
+    }
+    else if (index < questions.length) {
+      questionStep["message"] = question.label;
       questionStep["trigger"] = `${stepIndex+1}`;
     }
 
@@ -57,7 +65,18 @@ export const getStepsFromQuestionnaire = () => {
 };
 
 const getCloseQuestion = (element) => {
+  const options = [];
+  element.optionGroup.options.map((elementOption) => {
+    const option = {
+      value: elementOption.value,
+      label: elementOption.label,
+      trigger: "1",
+    };
 
+    options.push(option);
+  });
+
+  return options;
 };
 
 export const getClosedQuestions = () => {
