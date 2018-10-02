@@ -8,10 +8,9 @@ export default styles = StyleSheet.create({
     justifyContent: "center"
   },
   image: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    height: 300
+    width: 200,
+    height: 200,
+    borderRadius: 50
   },
   greetingText: {
     fontSize: 24,
@@ -20,13 +19,9 @@ export default styles = StyleSheet.create({
   },
   continueButton: {
     backgroundColor: 'black',
-    paddingTop: 15,
-    paddingBottom: 15,
     width: 100,
     height: 100,
     borderRadius: 50,
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    elevation: 5
   }
 });

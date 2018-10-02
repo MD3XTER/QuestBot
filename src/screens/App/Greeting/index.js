@@ -15,7 +15,7 @@ class Greeting extends Component {
           Welcome to our app bro!
           Here you can like answer questions and shit
         </Text>
-        <Button title="Fuck you" buttonStyle={styles.continueButton} onPress={() => navigateTo('Chat')}/>
+        <Button title="Start" buttonStyle={styles.continueButton} onPress={() => navigateTo('Chat')}/>
       </View>
     );
   }
