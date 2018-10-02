@@ -28,7 +28,7 @@ export const getStepsFromQuestionnaire = () => {
   let stepIndex = 1;
   questions.map((question, index) => {
     const questionStep = {
-      id: `${stepIndex}`,=
+      id: `${stepIndex}`,
     };
 
     if (question.options) {
@@ -88,6 +88,8 @@ export const getClosedQuestions = () => {
     {
       id: "1",
       message: getChosenQuestion(),
+      // test: if the user input STOP then isStop should be true and end the questionnaire else it should say false then just continue with the next trigger.
+      end: isStop,
       trigger: "2"
     },
     {
@@ -97,10 +99,7 @@ export const getClosedQuestions = () => {
         { value: currentOption, label: getOption(), trigger: "3" },
         { value: currentOption, label: getOption(), trigger: "3" }
       ],
-      // { This is for stopping the program, need to put this in the main operation
-      waitAction: quitSurvey(),
-      triggerNextStep: ({ value: currentOption, trigger: "3"})
-      // }
+      trigger: "3"
     },
     {
       id: "3",
@@ -121,23 +120,29 @@ export const getClosedQuestions = () => {
 
     alert(allValues.length);
 
+    // userInputStop: to check if the user input STOP.
+    userInputStop({ previousValue, steps });
     return "";
   }
 
   function getChosenQuestion() {
     return "insert question : what's up?";
   }
-// this function is needed to check if user inputs STOP then trigger the option to stop, THIS SHOULDN't BE HERE BUT FOR NOW.
-  function quitSurvey(stopStr,nextStep, currentOption) {
-    if (stopStr.equals("STOP")){
-      getQuit(nextStep, currentOption)
-    }
-  }
-
   return steps;
 };
+
+//This is to stop the program
+let isStop = false;
+
+// this function is needed to check if user inputs STOP then trigger the option to stop, THIS SHOULDN't BE HERE BUT FOR NOW.
+function userInputStop({ previousValue, steps }) {
+  if (previousValue.equals("STOP")){
+    getQuit()
+  }
+}
+
 // steps to stop the program
-export const getQuit = (nextStep, currentOption) => {
+export const getQuit = () => {
   const steps = [
     {
       id: "1",
@@ -145,22 +150,29 @@ export const getQuit = (nextStep, currentOption) => {
       user: true,
       options: [
         { value: 1, label: "Do you need to go?", trigger: "2" },
-        { value: 2, label: "Wanna keep talking?", trigger: "3" }
+        { value: 2, label: "Wanna keep talking?", trigger: "2" }
       ]
     },
     {
       id: "2",
-      message: "Yay, okay my next question is... ",
-      triggerNextStep: ({ value: currentOption, trigger: nextStep})
-    },
-    {
-      id: "3",
-      message: "Okay good bye, hope to talk to you someday again",
-      // main switch is needed to end the program
-      end: true
+      message: checkStop,
+      end: true,
     }
   ];
 
   return steps;
 };
 
+//Function to check the boolean to stop the program
+function checkStop({ previousValue, steps }) {
+  let response = "";
+
+  if(previousValue === 1){
+    response = "Okay good bye, hope to talk to you someday again";
+    isStop = true;
+  }else{
+    response = "Yay, okay my next question is... ";
+    isStop = false;
+  }
+  return response;
+}
