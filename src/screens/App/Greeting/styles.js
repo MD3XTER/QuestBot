@@ -3,25 +3,25 @@ import { StyleSheet } from "react-native";
 export default styles = StyleSheet.create({
   greetingContainer: {
     flex: 1,
-    backgroundColor: 'yellow'
+    backgroundColor: 'yellow',
+    alignItems: "center",
+    justifyContent: "center"
   },
   image: {
-    height: 300
+    width: 200,
+    height: 200,
+    borderRadius: 50
   },
   greetingText: {
-    backgroundColor: 'white',
+    fontSize: 24,
     margin: 30,
     textAlign: 'center',
   },
   continueButton: {
-    flex: 1,
     backgroundColor: 'black',
-    marginTop: 10,
-    paddingTop: 15,
-    paddingBottom: 15,
-    marginLeft: 30,
-    marginRight: 30,
-    borderRadius: 10,
-    borderWidth: 1,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    elevation: 5
   }
 });

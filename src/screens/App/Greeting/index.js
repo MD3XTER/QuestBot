@@ -3,12 +3,8 @@ import { View, Text, Image} from "react-native";
 import {Button} from "react-native-elements";
 import { connect } from "react-redux";
 
-
 import styles from "./styles";
-
-const redirect = () => {
-
-};
+import { navigateTo } from "../../../utils";
 
 class Greeting extends Component {
   render () {
@@ -19,7 +15,7 @@ class Greeting extends Component {
           Welcome to our app bro!
           Here you can like answer questions and shit
         </Text>
-        <Button title="title" buttonStyle={styles.continueButton}/>
+        <Button title="Start" buttonStyle={styles.continueButton} onPress={() => navigateTo('Chat')}/>
       </View>
     );
   }
