@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export default styles = StyleSheet.create({
   greetingContainer: {
     flex: 1,
-    backgroundColor: 'yellow',
+    backgroundColor: 'lemonchiffon',
     alignItems: "center",
     justifyContent: "center"
   },
@@ -13,15 +13,25 @@ export default styles = StyleSheet.create({
     borderRadius: 50
   },
   greetingText: {
-    fontSize: 24,
-    margin: 30,
+    fontSize: 25,
+    position: "absolute",
+    top: 50,
     textAlign: 'center',
+    fontWeight: "bold",
+  },
+  description: {
+    fontSize: 16,
+    textAlign: 'center',
+    margin: 15,
+    width: 250,
   },
   continueButton: {
-    backgroundColor: 'black',
-    width: 100,
-    height: 100,
+    backgroundColor: 'lightslategrey',
+    width: 75,
+    height: 75,
     borderRadius: 50,
-    elevation: 5
+    elevation: 5,
+    borderWidth: 3,
+    borderColor: 'lightgrey',
   }
 });

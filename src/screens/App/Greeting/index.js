@@ -10,12 +10,12 @@ class Greeting extends Component {
   render () {
     return (
       <View style={styles.greetingContainer}>
-        <Image style={styles.image} source={require('../../../images/dogo.jpg')} />
-        <Text style={styles.greetingText} >
-          Welcome to our app bro!
-          Here you can like answer questions and shit
-        </Text>
-        <Button title="Start" buttonStyle={styles.continueButton} onPress={() => navigateTo('Chat')}/>
+        <Text style={styles.greetingText} >Welcome to QuestBot!</Text>
+        <Image style={styles.image} source={require('../../../images/robo.png')} />
+
+        <Text style={styles.description}>Here you can answer questions and you get to talk with me!</Text>
+        <Button title ="Begin!" buttonStyle={styles.continueButton} onPress={() => navigateTo('Chat')}>
+        </Button>
       </View>
     );
   }

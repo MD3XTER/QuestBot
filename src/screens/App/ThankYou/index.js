@@ -21,14 +21,14 @@ class ThankYou extends Component {
     return (
       <View style={styles.thankYouContainer}>
         <Text style={styles.goodbyeText} >
-          Thanks for using this app!
+          Thank you for using QuestBot!
         </Text>
         <Image style={styles.bye} source={require("../../../images/bye.png")}/>
         <Text style={styles.teamText}>
           Development team
         </Text>
         <View style={styles.imagesContainer}>
-          <Image style={styles.image} source={require('../../../images/dogo.jpg')} />
+          <Image style={styles.image} source={require('../../../images/max.jpg')} />
           <Image style={styles.image} source={require('../../../images/dogo.jpg')} />
           <Image style={styles.image} source={require('../../../images/dogo.jpg')} />
           <Image style={styles.image} source={require('../../../images/dogo.jpg')} />
