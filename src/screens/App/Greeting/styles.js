@@ -15,13 +15,15 @@ export default styles = StyleSheet.create({
     flex: 0
   },
   greetingTextContainer: {
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: 'orange',
     borderWidth: 3,
     borderColor: 'lightgrey',
     borderRadius: 30,
     width: 250,
     margin: 20,
-    height: 60
+    height: 70
   },
   greetingText: {
     fontSize: 20,

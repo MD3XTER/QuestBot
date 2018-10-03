@@ -26,7 +26,7 @@ const AppStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: "Greeting",
+    initialRouteName: "ThankYou",
   }
 );
 

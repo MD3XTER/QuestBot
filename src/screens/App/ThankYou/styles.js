@@ -31,7 +31,10 @@ export default styles = StyleSheet.create({
     borderRadius: 30,
     position: 'absolute',
     width: 250,
-    top: 15
+    top: 15,
+    height: 70,
+    alignItems: "center",
+    justifyContent: "center"
   },
   goodbyeText: {
     fontSize: 22,
@@ -66,6 +69,13 @@ export default styles = StyleSheet.create({
   teamText: {
     fontSize: 18,
     textAlign: 'center',
+  },
+  teamName: {
+    backgroundColor: 'orange',
+    borderRadius: 10,
+    alignItems:'center',
+    justifyContent:'center',
+    flex: 0
   },
   roboImage: {
     margin: 5,
