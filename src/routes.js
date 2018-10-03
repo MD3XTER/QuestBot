@@ -19,14 +19,14 @@ const AppStack = createStackNavigator(
       })
     },
     ThankYou: {
-      screen: Greeting,
+      screen: ThankYou,
       navigationOptions: () => ({
         header: null
       })
     }
   },
   {
-    initialRouteName: "ThankYou",
+    initialRouteName: "Greeting",
   }
 );
 

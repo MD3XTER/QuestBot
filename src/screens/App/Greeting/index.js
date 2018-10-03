@@ -9,11 +9,14 @@ import { navigateTo } from "../../../utils";
 class Greeting extends Component {
   render () {
     return (
-      <View style={styles.greetingContainer}>
+      <View style={styles.container}>
+        <View style={styles.greetingTextContainer}>
         <Text style={styles.greetingText} >Welcome to QuestBot!</Text>
-        <Image style={styles.image} source={require('../../../images/robo.png')} />
-
-        <Text style={styles.description}>Here you can answer questions and you get to talk with me!</Text>
+        </View>
+        <Image style={styles.teamImage} source={require('../../../images/robo.png')} />
+        <View style={styles.descriptionContainer}>
+        <Text style={styles.description}>'"Here you can answer questions and you get to talk with me!"'</Text>
+        </View>
         <Button title ="Begin!" buttonStyle={styles.continueButton} onPress={() => navigateTo('Chat')}>
         </Button>
       </View>

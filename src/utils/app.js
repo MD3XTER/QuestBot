@@ -168,7 +168,7 @@ function checkStop({ previousValue, steps }) {
   let response = "";
 
   if(previousValue === 1){
-    response = "Okay good bye, hope to talk to you someday again";
+    response = "Okay good roboImage, hope to talk to you someday again";
     isStop = true;
   }else{
     response = "Yay, okay my next question is... ";
