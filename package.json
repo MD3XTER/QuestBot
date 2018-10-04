@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "android": "react-native run-android",
+    "android-unsigned-apk": "cd android && ./gradlew assembleRelease && cd ..",
     "clean": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean && npm run clean-android",
     "clean-android": "cd android && ./gradlew clean",
     "reset-cache": "npm start -- --reset-cache",
