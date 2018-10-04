@@ -1,48 +1,78 @@
-import response from "./response";
+import apiResponse from "./api_response";
+import botResponses from "./bot_responses";
+import { navigateTo } from "./navigation";
+
+let steps = [];
+let nextStepID;
+let stepIndex = 1;
+let questionsLength;
+let additionalResponses = 0;
 
 export const getStepsFromQuestionnaire = () => {
-  console.log(response);
+  console.log(apiResponse);
 
-  const questions = getQuestions(response.pages);
+  const questions = getQuestions(apiResponse.pages);
+  questionsLength = questions.length;
 
-  let steps = [];
-  let stepIndex = 1;
+  nextStepID = getNextStepID(questions.length, stepIndex);
 
-  questions.map((question, index) => {
-    let nextStepID = getNextStepID(index, questions.length, stepIndex);
+  let stepResponse;
 
+  botResponses.greetings.map((message) => {
+    stepResponse = getStepOpenQuestion(stepIndex, message);
+    addStep(stepResponse);
+  });
+
+  questions.map((question) => {
     let stepQuestion;
 
-    stepQuestion = getStepOpenQuestion(stepIndex, question.label, nextStepID);
-
-    steps.push(stepQuestion);
-    stepIndex++;
-    nextStepID = getNextStepID(index, questions.length, stepIndex);
+    stepQuestion = getStepOpenQuestion(stepIndex, question.label);
+    addStep(stepQuestion);
 
     if (question.options) {
       stepQuestion = getStepCloseQuestion(stepIndex, question.options);
-
-      steps.push(stepQuestion);
-      stepIndex++;
+      addStep(stepQuestion);
     }
     else {
-      const answer = getStepAnswer(stepIndex, nextStepID);
-
-      steps.push(answer);
-      stepIndex++;
+      const stepAnswer = getStepAnswer(stepIndex);
+      addStep(stepAnswer);
     }
 
+    const showResponse = Math.floor(Math.random() * Math.floor(questionsLength)) > 5;
+    if (showResponse) {
+      const response = botResponses.answer_responses[Math.floor(Math.random()*botResponses.answer_responses.length)];
+      stepResponse = getStepOpenQuestion(stepIndex, response);
+      addStep(stepResponse);
+      additionalResponses++;
+    }
   });
 
-  console.log(questions);
+  botResponses.thanks.map((message, index) => {
+    stepResponse = getStepOpenQuestion(stepIndex, message);
+
+    if (index === botResponses.thanks.length-1) {
+      delete stepResponse["trigger"];
+      stepResponse["end"] = true;
+    }
+
+    addStep(stepResponse);
+  });
+
+  console.log(`Additional steps added: ${additionalResponses}`);
   console.log(steps);
 
   return steps;
 };
 
-const getNextStepID = (questionIndex, questionsLength, currentStepIndex) => {
-  return questionIndex === questionsLength-1 ? false : currentStepIndex+1;
+const addStep = (stepResponse) => {
+  steps.push(stepResponse);
+  stepIndex++;
+  nextStepID = getNextStepID(questionsLength, stepIndex);
+};
 
+const getNextStepID = (questionsLength, currentStepIndex) => {
+  const stepsAmount = questionsLength*2+additionalResponses;
+  return currentStepIndex-1 === stepsAmount+botResponses.greetings.length+botResponses.thanks.length ? stepsAmount+botResponses.greetings.length+1 : currentStepIndex+1;
 };
 
 const getQuestions = (pages) => {
@@ -57,7 +87,7 @@ const getQuestions = (pages) => {
       }
       else if (element.type === "question_closed") {
         question["label"] = element.label;
-        question["options"] = getElementCloseQuestionOptions(element.optionGroup, 1);
+        question["options"] = getElementCloseQuestionOptions(element.optionGroup);
       }
       else {
         return false;
@@ -70,18 +100,13 @@ const getQuestions = (pages) => {
   return questions;
 };
 
-const getStepOpenQuestion = (id, label, nextElementID) => {
+const getStepOpenQuestion = (id, label) => {
   const step = {
     id: `${id}`,
     message: label,
   };
 
-  if (nextElementID) {
-    step["trigger"] = `${nextElementID}`;
-  }
-  else {
-    step["end"] = true;
-  }
+  step["trigger"] = `${nextStepID}`;
 
   return step;
 };
@@ -92,32 +117,29 @@ const getStepCloseQuestion = (id, options) => {
     options
   };
 
+  step.options = updateCloseQuestionOptions(options);
+
   return step;
 };
 
-const getStepAnswer = (id, nextElementID) => {
+const getStepAnswer = (id) => {
   const step = {
     id: `${id}`,
     user: true
   };
 
-  if (nextElementID) {
-    step["trigger"] = `${nextElementID}`;
-  }
-  else {
-    step["end"] = true;
-  }
+  step["trigger"] = ({ value, steps: currentSteps }) => value === "STOP" ? `${nextStepID}` : `${Object.keys(currentSteps).length+1}`;
 
   return step;
 };
 
-const getElementCloseQuestionOptions = (optionGroup, nextElementID) => {
+const getElementCloseQuestionOptions = (optionGroup) => {
   const options = [];
   optionGroup.options.map((elementOption) => {
     const option = {
       value: elementOption.value,
       label: elementOption.label,
-      trigger: `${nextElementID}`,
+      trigger: ``,
     };
 
     options.push(option);
@@ -126,88 +148,9 @@ const getElementCloseQuestionOptions = (optionGroup, nextElementID) => {
   return options;
 };
 
-export const getClosedQuestions = () => {
-  let storeValue;
-  let allValues = [];
-  let currentOption = 0;
-
-  const steps = [
-    {
-      id: "1",
-      message: getChosenQuestion(),
-      trigger: "2"
-    },
-    {
-      id: "2",
-      options: [
-        { value: currentOption, label: getOption(), trigger: "3" },
-        { value: currentOption, label: getOption(), trigger: "3" },
-        { value: currentOption, label: getOption(), trigger: "3" }
-      ],
-      // { This is for stopping the program, need to put this in the main operation
-      waitAction: quitSurvey(),
-      triggerNextStep: ({ value: currentOption, trigger: "3"})
-      // }
-    },
-    {
-      id: "3",
-      message: getChosenOption,
-      end: true
-    }
-  ];
-
-  function getOption() {
-    currentOption++;
-    return "insert option" + currentOption;
-  }
-
-  function getChosenOption({ previousValue, steps }) {
-    storeValue = previousValue;
-
-    allValues.push(storeValue);
-
-    alert(allValues.length);
-
-    return "";
-  }
-
-  function getChosenQuestion() {
-    return "insert question : what's up?";
-  }
-// this function is needed to check if user inputs STOP then trigger the option to stop, THIS SHOULDN't BE HERE BUT FOR NOW.
-  function quitSurvey(stopStr,nextStep, currentOption) {
-    if (stopStr.equals("STOP")){
-      getQuit(nextStep, currentOption)
-    }
-  }
-
-  return steps;
+const updateCloseQuestionOptions = (options) => {
+  return options.map((option) => {
+    option.trigger = nextStepID;
+    return option;
+  });
 };
-// steps to stop the program
-export const getQuit = (nextStep, currentOption) => {
-  const steps = [
-    {
-      id: "1",
-      message: "Are you sure you want to STOP",
-      user: true,
-      options: [
-        { value: 1, label: "Do you need to go?", trigger: "2" },
-        { value: 2, label: "Wanna keep talking?", trigger: "3" }
-      ]
-    },
-    {
-      id: "2",
-      message: "Yay, okay my next question is... ",
-      triggerNextStep: ({ value: currentOption, trigger: nextStep})
-    },
-    {
-      id: "3",
-      message: "Okay good bye, hope to talk to you someday again",
-      // main switch is needed to end the program
-      end: true
-    }
-  ];
-
-  return steps;
-};
-

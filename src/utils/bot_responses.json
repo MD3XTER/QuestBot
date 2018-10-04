@@ -1,0 +1,19 @@
+{
+  "greetings": [
+    "Hello there, welcome to QuestBot!",
+    "I hope you are feeling alive and well, I myself am all charged up!",
+    "I will be asking you some questions, if you ever feel like you want to quit, then just type STOP.",
+    "Ok, here comes the first question:"
+  ],
+  "answer_responses": [
+    "Take your time, there is no rush!",
+    "Okay...",
+    "I have to say, you’re very nice to talk to 😀",
+    "Let’s keep going!",
+    "We’re making some nice progress 🙃",
+    "This is so fun, I love talking to you 😊"
+  ],
+  "thanks": [
+    "It was a pleasure talking with you, have a good one!"
+  ]
+}
