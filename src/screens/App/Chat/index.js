@@ -17,7 +17,7 @@ class Chat extends Component {
   }
 
   handleEnd = () => {
-    setTimeout(() => navigateTo("ThankYou"), 3000);
+    setTimeout(() => navigateTo("ThankYou"), 5000);
   };
 
   render () {
