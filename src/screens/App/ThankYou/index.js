@@ -24,15 +24,15 @@ class ThankYou extends Component {
             <Text style={styles.teamName}>Max</Text>
           </View>
           <View style={{flex:0,alignItems:'center',justifyContent:'center'}}>
-          <Image style={styles.teamImage} source={require("../../../images/dogo.jpg")}/>
+          <Image style={styles.teamImage} source={require("../../../images/arminda.jpg")}/>
             <Text style={styles.teamName}>Dogo1</Text>
           </View>
           <View style={{flex:0,alignItems:'center',justifyContent:'center'}}>
-          <Image style={styles.teamImage} source={require("../../../images/dogo.jpg")}/>
+          <Image style={styles.teamImage} source={require("../../../images/mihail.jpg")}/>
             <Text style={styles.teamName}>Dogo2</Text>
           </View>
           <View style={{flex:0,alignItems:'center',justifyContent:'center'}}>
-          <Image style={styles.teamImage} source={require("../../../images/dogo.jpg")}/>
+          <Image style={styles.teamImage} source={require("../../../images/andrei.jpg")}/>
             <Text style={styles.teamName}>Dogo3</Text>
           </View>
         </View>
