@@ -19,13 +19,13 @@ class Chat extends Component {
     ];
 
     steps = getStepsFromQuestionnaire();
-
     return (
       <ChatBot
         steps={steps}
-        botAvatar={
-          "https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png"
-        }
+        botAvatar={"https://i.imgur.com/zy8gVf5.png"}
+        botBubbleColor={'orange'}
+        style={styles.botStyle}
+
       />
     );
   }
