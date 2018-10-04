@@ -15,29 +15,31 @@ export default class ThankYou extends Component {
       <View style={commonStyles.container}>
         <Text style={commonStyles.mainText}>Thank you for using QuestBot</Text>
 
-        <Image style={commonStyles.logo} source={logo}/>
+        <Image style={commonStyles.logo} source={logo} />
 
         <Text style={commonStyles.descriptionText}>
           "I hope you enjoyed your time with me, until next time!"
         </Text>
 
-        <Text style={[commonStyles.mainText, { marginBottom: 10 }]}>Development team</Text>
+        <Text style={[commonStyles.mainText, { marginBottom: 10 }]}>
+          Development team
+        </Text>
 
         <View style={styles.teamContainer}>
           <View style={styles.memberContainer}>
-            <Image style={styles.memberImage} source={maxAvatar}/>
+            <Image style={styles.memberImage} source={maxAvatar} />
             <Text style={styles.memberName}>Max</Text>
           </View>
           <View style={styles.memberContainer}>
-            <Image style={styles.memberImage} source={armindaAvatar}/>
+            <Image style={styles.memberImage} source={armindaAvatar} />
             <Text style={styles.memberName}>Arminda</Text>
           </View>
           <View style={styles.memberContainer}>
-            <Image style={styles.memberImage} source={mihaiAvatar}/>
+            <Image style={styles.memberImage} source={mihaiAvatar} />
             <Text style={styles.memberName}>Mihai</Text>
           </View>
           <View style={styles.memberContainer}>
-            <Image style={styles.memberImage} source={andreiAvatar}/>
+            <Image style={styles.memberImage} source={andreiAvatar} />
             <Text style={styles.memberName}>Andrei</Text>
           </View>
         </View>

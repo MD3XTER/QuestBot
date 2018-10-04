@@ -12,7 +12,6 @@ class Chat extends Component {
 
   componentWillMount() {
     const steps = getStepsFromQuestionnaire();
-
     this.setState({ steps });
   }
 

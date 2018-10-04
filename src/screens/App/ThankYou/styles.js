@@ -1,12 +1,12 @@
 import { StyleSheet } from "react-native";
 
-export default styles = StyleSheet.create({
+export default (styles = StyleSheet.create({
   teamContainer: {
     flexDirection: "row"
   },
   memberContainer: {
     marginLeft: 7,
-    marginRight: 7,
+    marginRight: 7
   },
   memberImage: {
     width: 55,
@@ -17,6 +17,6 @@ export default styles = StyleSheet.create({
     borderColor: "rgba(0,0,0,0.2)"
   },
   memberName: {
-    textAlign: "center",
+    textAlign: "center"
   }
-});
+}));
