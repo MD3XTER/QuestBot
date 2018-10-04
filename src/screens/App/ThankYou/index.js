@@ -1,51 +1,47 @@
 import React, { Component } from "react";
 import { View, Text, Image } from "react-native";
-import { connect } from "react-redux";
 
+import logo from "../../../images/logo.png";
+import mihaiAvatar from "../../../images/mihai.jpg";
+import armindaAvatar from "../../../images/arminda.jpg";
+import andreiAvatar from "../../../images/andrei.jpg";
+import maxAvatar from "../../../images/max.jpg";
+import commonStyles from "../Greeting/styles";
 import styles from "./styles";
 
-class ThankYou extends Component {
+export default class ThankYou extends Component {
   render() {
     return (
-      <View style={styles.thankYouContainer}>
-        <View style={styles.goodbyeTextContainer}>
-          <Text style={styles.goodbyeText}>Thank you for using QuestBot!</Text>
-        </View>
-        <Image style={styles.roboImage} source={require("../../../images/robo.png")}/>
-        <View style={styles.descriptionContainer}>
-          <Text style={styles.description}>'"I hope you enjoyed your time with me, until next time!"'</Text>
-        </View>
-        <View style={styles.teamTextContainer}>
-          <Text style={styles.teamText}>Development team</Text>
-        </View>
-        <View style={styles.imagesContainer}>
-          <View style={{flex:0,alignItems:'center',justifyContent:'center'}}>
-          <Image style={styles.teamImage} source={require("../../../images/max.jpg")}/>
-            <Text style={styles.teamName}>Max</Text>
+      <View style={commonStyles.container}>
+        <Text style={commonStyles.mainText}>Thank you for using QuestBot</Text>
+
+        <Image style={commonStyles.logo} source={logo}/>
+
+        <Text style={commonStyles.descriptionText}>
+          "I hope you enjoyed your time with me, until next time!"
+        </Text>
+
+        <Text style={[commonStyles.mainText, { marginBottom: 10 }]}>Development team</Text>
+
+        <View style={styles.teamContainer}>
+          <View style={styles.memberContainer}>
+            <Image style={styles.memberImage} source={maxAvatar}/>
+            <Text style={styles.memberName}>Max</Text>
           </View>
-          <View style={{flex:0,alignItems:'center',justifyContent:'center'}}>
-          <Image style={styles.teamImage} source={require("../../../images/arminda.jpg")}/>
-            <Text style={styles.teamName}>Dogo1</Text>
+          <View style={styles.memberContainer}>
+            <Image style={styles.memberImage} source={armindaAvatar}/>
+            <Text style={styles.memberName}>Arminda</Text>
           </View>
-          <View style={{flex:0,alignItems:'center',justifyContent:'center'}}>
-          <Image style={styles.teamImage} source={require("../../../images/mihail.jpg")}/>
-            <Text style={styles.teamName}>Dogo2</Text>
+          <View style={styles.memberContainer}>
+            <Image style={styles.memberImage} source={mihaiAvatar}/>
+            <Text style={styles.memberName}>Mihai</Text>
           </View>
-          <View style={{flex:0,alignItems:'center',justifyContent:'center'}}>
-          <Image style={styles.teamImage} source={require("../../../images/andrei.jpg")}/>
-            <Text style={styles.teamName}>Dogo3</Text>
+          <View style={styles.memberContainer}>
+            <Image style={styles.memberImage} source={andreiAvatar}/>
+            <Text style={styles.memberName}>Andrei</Text>
           </View>
         </View>
       </View>
     );
   }
 }
-
-const mapStateToProps = ({ app }) => {
-  return { steps: app.steps };
-};
-
-export default connect(
-  mapStateToProps,
-  {}
-)(ThankYou);

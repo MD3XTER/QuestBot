@@ -3,56 +3,35 @@ import { StyleSheet } from "react-native";
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'lemonchiffon',
+    justifyContent: "center",
     alignItems: "center",
-    justifyContent: "center"
+    paddingLeft: 50,
+    paddingRight: 50,
+    backgroundColor: "white",
   },
-  teamImage: {
-    margin: 10,
+  mainText: {
+    fontSize: 22,
+    textAlign: "center",
+    fontFamily: "Arial",
+    marginBottom: 25,
+  },
+  logo: {
     width: 200,
     height: 200,
-    borderRadius: 50,
-    flex: 0
+    resizeMode: "contain",
+    marginBottom: 25,
   },
-  greetingTextContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: 'orange',
-    borderWidth: 3,
-    borderColor: 'lightgrey',
-    borderRadius: 30,
-    width: 250,
-    margin: 20,
-    height: 70
-  },
-  greetingText: {
-    fontSize: 20,
-    textAlign: 'center',
-    fontWeight: "bold",
-  },
-  descriptionContainer: {
-    backgroundColor: 'orange',
-    borderWidth: 3,
-    borderColor: 'lightgrey',
-    borderRadius: 30,
-    width: 300,
-    margin: 20,
-    flex: 0
-  },
-  description: {
+  descriptionText: {
+    textAlign: "center",
     fontSize: 16,
-    textAlign: 'center',
-    margin: 15,
-    width: 250,
-    fontStyle: 'italic'
+    fontStyle: "italic",
+    marginBottom: 30,
   },
-  continueButton: {
-    backgroundColor: 'orange',
-    width: 75,
-    height: 75,
-    borderRadius: 50,
-    elevation: 5,
-    borderWidth: 3,
-    borderColor: 'lightgrey',
+  button: {
+    backgroundColor: "#8FCAFB",
+    width: 200,
+    height: 50,
+    borderRadius: 25,
+    elevation: 1,
   }
 });

@@ -1,87 +1,22 @@
 import { StyleSheet } from "react-native";
 
 export default styles = StyleSheet.create({
-  thankYouContainer: {
-    flex: 1,
-    backgroundColor: 'lemonchiffon',
-    alignItems: "center",
-    justifyContent: "center"
+  teamContainer: {
+    flexDirection: "row"
   },
-  imagesContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'flex-start',
-    position: "absolute",
-    bottom: 25
+  memberContainer: {
+    marginLeft: 7,
+    marginRight: 7,
   },
-  teamImage: {
+  memberImage: {
     width: 55,
     height: 55,
     borderRadius: 50,
-    borderWidth: 3,
-    borderColor: 'lightgrey',
-    margin: 3,
-    flex: 0
+    marginBottom: 5,
+    borderWidth: 1.5,
+    borderColor: "rgba(0,0,0,0.2)"
   },
-  goodbyeTextContainer: {
-    backgroundColor: 'orange',
-    borderWidth: 3,
-    borderColor: 'lightgrey',
-    flex: 0,
-    borderRadius: 30,
-    position: 'absolute',
-    width: 250,
-    top: 15,
-    height: 70,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  goodbyeText: {
-    fontSize: 22,
-    textAlign: 'center',
-    fontWeight: "bold"
-  },
-  teamTextContainer: {
-    backgroundColor: 'orange',
-    borderWidth: 3,
-    borderColor: 'lightgrey',
-    borderRadius: 30,
-    flex: 0,
-    margin: 10,
-    width: 230
-  },
-  descriptionContainer: {
-    backgroundColor: 'orange',
-    borderWidth: 3,
-    borderColor: 'lightgrey',
-    borderRadius: 30,
-    width: 300,
-    margin: 20,
-    flex: 0
-  },
-  description: {
-    fontSize: 16,
-    textAlign: 'center',
-    margin: 15,
-    width: 250,
-    fontStyle: 'italic'
-  },
-  teamText: {
-    fontSize: 18,
-    textAlign: 'center',
-  },
-  teamName: {
-    backgroundColor: 'orange',
-    borderRadius: 10,
-    alignItems:'center',
-    justifyContent:'center',
-    flex: 0
-  },
-  roboImage: {
-    margin: 5,
-    width: 200,
-    height: 200,
-    borderRadius: 50,
-    flex: 0
+  memberName: {
+    textAlign: "center",
   }
 });

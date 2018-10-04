@@ -1,31 +1,37 @@
 import React, { Component } from "react";
-import { View } from "react-native";
 import { connect } from "react-redux";
 import ChatBot from "react-native-chatbot";
 
 import styles from "./styles";
-import { getSteps, getStepsFromQuestionnaire } from "../../../utils";
+import { getStepsFromQuestionnaire, navigateTo } from "../../../utils";
 
 class Chat extends Component {
+  state = {
+    steps: []
+  };
+
+  componentWillMount() {
+    const steps = getStepsFromQuestionnaire();
+
+    this.setState({ steps });
+  }
+
+  handleEnd = () => {
+    setTimeout(() => navigateTo("ThankYou"), 3000);
+  };
+
   render () {
-   // getStepsFromQuestionnaire();
+    const { steps } = this.state;
 
-    let steps = [
-      {
-        id: "1",
-        message: "test",
-        end: true
-      }
-    ];
-
-    steps = getStepsFromQuestionnaire();
     return (
       <ChatBot
+        handleEnd={this.handleEnd}
         steps={steps}
-        botAvatar={"https://i.imgur.com/zy8gVf5.png"}
-        botBubbleColor={'orange'}
-        style={styles.botStyle}
-
+        botAvatar="https://i.imgur.com/XnqSldH.png"
+        userAvatar="https://i.imgur.com/7DEThbw.jpg"
+        botBubbleColor="#8FCAFF"
+        userBubbleColor="rgba(0,0,0,0.1)"
+        contentStyle={styles.container}
       />
     );
   }

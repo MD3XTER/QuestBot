@@ -6,17 +6,17 @@ import AppLoadingScreen from "./screens/App/ThankYou/index";
 
 const AppStack = createStackNavigator(
   {
-    Chat: {
-      screen: Chat,
-      navigationOptions: () => ({
-        header: null
-      }),
-    },
     Greeting: {
       screen: Greeting,
       navigationOptions: () => ({
         header: null
       })
+    },
+    Chat: {
+      screen: Chat,
+      navigationOptions: () => ({
+        header: null
+      }),
     },
     ThankYou: {
       screen: ThankYou,
@@ -26,7 +26,7 @@ const AppStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: "Chat",
+    initialRouteName: "Greeting",
   }
 );
 
