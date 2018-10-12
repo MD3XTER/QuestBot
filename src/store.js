@@ -1,18 +1,5 @@
-import createSagaMiddleware from "redux-saga";
-import { applyMiddleware, createStore } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
+import React from "react";
 
-import reducers from "./modules/reducers";
-import sagas from "./modules/sagas";
-
-const sagaMiddleware = createSagaMiddleware();
-
-const store = createStore(
-  reducers,
-  composeWithDevTools(),
-  applyMiddleware(sagaMiddleware)
-);
-
-sagaMiddleware.run(sagas);
+const store = React.createContext({ authToken: "", questionnaire: {} });
 
 export default store;

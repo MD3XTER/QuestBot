@@ -1,17 +1,19 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { PureComponent } from "react";
 import ChatBot from "react-native-chatbot";
 
 import styles from "./styles";
 import { getStepsFromQuestionnaire, navigateTo } from "../../../utils";
 
-class Chat extends Component {
+export default class Chat extends PureComponent {
   state = {
     steps: []
   };
 
-  componentWillMount() {
-    const steps = getStepsFromQuestionnaire();
+  async componentWillMount() {
+    const { questionnaire } = this.props;
+
+    const steps = getStepsFromQuestionnaire(questionnaire);
+
     this.setState({ steps });
   }
 
@@ -23,24 +25,17 @@ class Chat extends Component {
     const { steps } = this.state;
 
     return (
-      <ChatBot
-        handleEnd={this.handleEnd}
-        steps={steps}
-        botAvatar="https://i.imgur.com/XnqSldH.png"
-        userAvatar="https://i.imgur.com/7DEThbw.jpg"
-        botBubbleColor="#8FCAFF"
-        userBubbleColor="rgba(0,0,0,0.1)"
-        contentStyle={styles.container}
-      />
+      steps.length > 0 && (
+        <ChatBot
+          handleEnd={this.handleEnd}
+          steps={steps}
+          botAvatar="https://i.imgur.com/XnqSldH.png"
+          userAvatar="https://i.imgur.com/7DEThbw.jpg"
+          botBubbleColor="#8FCAFF"
+          userBubbleColor="rgba(0,0,0,0.1)"
+          contentStyle={styles.container}
+        />
+      )
     );
   }
 }
-
-const mapStateToProps = ({ app }) => {
-  return { steps: app.steps }
-};
-
-export default connect(
-  mapStateToProps,
-  {}
-)(Chat);

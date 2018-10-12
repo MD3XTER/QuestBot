@@ -1,6 +1,4 @@
-import apiResponse from "./api_response";
 import botResponses from "./bot_responses";
-import { navigateTo } from "./navigation";
 
 let steps = [];
 let nextStepID;
@@ -8,10 +6,10 @@ let stepIndex = 1;
 let questionsLength;
 let additionalResponses = 0;
 
-export const getStepsFromQuestionnaire = () => {
-  console.log(apiResponse);
+export const getStepsFromQuestionnaire = (questionnaire) => {
+  console.log(questionnaire);
 
-  const questions = getQuestions(apiResponse.pages);
+  const questions = getQuestions(questionnaire.pages);
   questionsLength = questions.length;
 
   nextStepID = getNextStepID(questions.length, stepIndex);

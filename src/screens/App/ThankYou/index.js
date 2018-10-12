@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { View, Text, Image } from "react-native";
 
 import logo from "../../../images/logo.png";
@@ -9,7 +9,7 @@ import maxAvatar from "../../../images/max.jpg";
 import commonStyles from "../Greeting/styles";
 import styles from "./styles";
 
-export default class ThankYou extends Component {
+export default class ThankYou extends PureComponent {
   render() {
     return (
       <View style={commonStyles.container}>
