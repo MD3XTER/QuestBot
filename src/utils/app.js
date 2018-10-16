@@ -126,6 +126,8 @@ const getStepCloseQuestion = (id, options) => {
 
   skipSetId++;
 
+  step.options = updateCloseQuestionOptions(options);
+
   return step;
 };
 
