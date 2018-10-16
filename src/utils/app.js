@@ -3,6 +3,7 @@ import botResponses from "./bot_responses";
 import { navigateTo } from "./navigation";
 
 let steps = [];
+export let userResponse = [];
 let nextStepID;
 let stepIndex = 1;
 let questionsLength;
@@ -106,7 +107,7 @@ const getStepOpenQuestion = (id, label, setId) => {
   };
 
   if (setId) {
-    step["message"] = `${id-skipSetId} ${label}`;
+    step["message"] = `${id-skipSetId}. ${label}`;
   }
   else {
     skipSetId++;

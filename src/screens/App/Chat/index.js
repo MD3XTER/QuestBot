@@ -13,11 +13,18 @@ class Chat extends Component {
   componentWillMount() {
     const steps = getStepsFromQuestionnaire();
     this.setState({ steps });
+    // this.handleEnd = this.handleEnd.bind(this);
   }
 
   handleEnd = () => {
     setTimeout(() => navigateTo("ThankYou"), 5000);
   };
+
+  // handleEnd({steps, values}){
+  //   for(let i = 0; i < steps.length;i++){
+  //     userResponse.push(`${values[i]}`);
+  //   }
+  // }
 
   render () {
     const { steps } = this.state;
