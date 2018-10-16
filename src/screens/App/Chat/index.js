@@ -1,10 +1,11 @@
 import React, { PureComponent } from "react";
 import ChatBot from "react-native-chatbot";
+import { connect } from "react-redux";
 
 import styles from "./styles";
 import { getStepsFromQuestionnaire, navigateTo } from "../../../utils";
 
-export default class Chat extends PureComponent {
+class Chat extends PureComponent {
   state = {
     steps: []
   };
@@ -39,3 +40,9 @@ export default class Chat extends PureComponent {
     );
   }
 }
+
+const mapStateToProps = ({ app: { questionnaire } }) => {
+  return { questionnaire };
+};
+
+export default connect(mapStateToProps)(Chat);

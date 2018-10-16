@@ -1,18 +1,21 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
+import { Provider } from "react-redux";
 
-import Greeting from "./screens/App/Greeting";
 import store from "./store";
+import { peripheralDisconnected } from "./modules/actions";
 import RootNavigator from "./routes";
 import { setTopLevelNavigator } from "./utils";
 
-export default class Index extends Component {
-// <RootNavigator ref={navigatorRef => setTopLevelNavigator(navigatorRef)} />
-
-render() {
+export default class Index extends PureComponent {
+  render() {
     return (
-      <store.Provider value={"green"}>
-          <Greeting />
-      </store.Provider>
+      <Provider store={store}>
+        <RootNavigator
+          ref={navigatorRef => {
+            setTopLevelNavigator(navigatorRef, store);
+          }}
+        />
+      </Provider>
     );
   }
 }
