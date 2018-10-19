@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { View, Text, Image, TouchableOpacity, Keyboard } from "react-native";
+import { View, Text, Image, TouchableOpacity, Keyboard, Animated } from "react-native";
 import ChatBot from "react-native-chatbot";
 import { Overlay } from "react-native-elements";
 import logo from "../../../images/logo.png";
@@ -9,12 +9,50 @@ import styles from "./styles";
 import { getStepsFromQuestionnaire, navigateTo } from "../../../utils";
 import commonStyles from "../Greeting/styles";
 
+class ImageLoader extends Component {
+  state = {
+    opacity: new Animated.Value(0),
+  };
+
+  onLoad = () => {
+    Animated.timing(this.state.opacity, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true
+    }).start();
+  };
+
+  render() {
+    return (
+      <Animated.Image
+        onLoad={this.onLoad}
+        {...this.props}
+        style={[
+          {
+            opacity: this.state.opacity,
+            transform: [
+              {
+                scale: this.state.opacity.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [0.85, 1]
+                })
+              }
+
+            ]
+          },
+          this.props.style
+        ]}
+      />
+    );
+  }
+}
+
 class Chat extends Component {
 
   static navigationOptions = ({ navigation }) => {
     return {
-      title: 'Questbot Survey',
-      headerTitleStyle: {color: '#8FCAFB'},
+      title: "Questbot Survey",
+      headerTitleStyle: { color: "#8FCAFB" },
       headerLeft: null,
       headerRight: (
         <TouchableOpacity style={styles.helpButton} onPress={navigation.getParam("toggleOverlay")}>
@@ -71,7 +109,7 @@ class Chat extends Component {
           isVisible={this.state.showOverlay}
           onBackdropPress={() => this.setState({ showOverlay: false })}
         >
-          <Image style={styles.overlayImage} source={logo}/>
+          <ImageLoader style={styles.overlayImage} source={logo}/>
           <Text style={commonStyles.descriptionText}>"If you ever feel like you want to quit, then type STOP in the
             chat."</Text>
         </Overlay>
