@@ -2,8 +2,8 @@ import apiResponse from "./api_response";
 import botResponses from "./bot_responses";
 import { navigateTo } from "./navigation";
 
-let steps = [];
-export let userResponse = [];
+export let steps = [];
+export let userResponses = [];
 let nextStepID;
 let stepIndex = 1;
 let questionsLength;
@@ -122,7 +122,7 @@ const getStepOpenQuestion = (id, label, setId) => {
 const getStepCloseQuestion = (id, options) => {
   const step = {
     id: `${id}`,
-    options
+    options,
   };
 
   skipSetId++;
@@ -135,7 +135,7 @@ const getStepCloseQuestion = (id, options) => {
 const getStepAnswer = (id) => {
   const step = {
     id: `${id}`,
-    user: true
+    user: true,
   };
 
   skipSetId++;

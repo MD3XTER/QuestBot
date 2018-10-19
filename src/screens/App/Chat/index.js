@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import ChatBot from "react-native-chatbot";
 
 import styles from "./styles";
-import { getStepsFromQuestionnaire, navigateTo } from "../../../utils";
+import { getStepsFromQuestionnaire, navigateTo, userResponses } from "../../../utils";
+import { steps } from "../../../utils/app";
 
 class Chat extends Component {
   state = {
@@ -13,18 +14,16 @@ class Chat extends Component {
   componentWillMount() {
     const steps = getStepsFromQuestionnaire();
     this.setState({ steps });
-    // this.handleEnd = this.handleEnd.bind(this);
+     this.handleEnd = this.handleEnd.bind(this);
   }
 
-  handleEnd = () => {
+  handleEnd = ({values}) => {
+    for(let value of values){
+      userResponses.push(`${value}`);
+    }
     setTimeout(() => navigateTo("ThankYou"), 5000);
   };
 
-  // handleEnd({steps, values}){
-  //   for(let i = 0; i < steps.length;i++){
-  //     userResponse.push(`${values[i]}`);
-  //   }
-  // }
 
   render () {
     const { steps } = this.state;
@@ -32,6 +31,7 @@ class Chat extends Component {
     return (
       <ChatBot
         handleEnd={this.handleEnd}
+
         steps={steps}
         botAvatar="https://i.imgur.com/XnqSldH.png"
         userAvatar="https://i.imgur.com/7DEThbw.jpg"
