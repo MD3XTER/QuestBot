@@ -3,10 +3,12 @@ import botResponses from "./bot_responses";
 import { navigateTo } from "./navigation";
 
 let steps = [];
+export let userResponse = [];
 let nextStepID;
 let stepIndex = 1;
 let questionsLength;
 let additionalResponses = 0;
+let skipSetId = 0;
 
 export const getStepsFromQuestionnaire = () => {
   console.log(apiResponse);
@@ -25,8 +27,7 @@ export const getStepsFromQuestionnaire = () => {
 
   questions.map((question) => {
     let stepQuestion;
-
-    stepQuestion = getStepOpenQuestion(stepIndex, question.label);
+    stepQuestion = getStepOpenQuestion(stepIndex, question.label, true);
     addStep(stepQuestion);
 
     if (question.options) {
@@ -40,7 +41,7 @@ export const getStepsFromQuestionnaire = () => {
 
     const showResponse = Math.floor(Math.random() * Math.floor(questionsLength)) > 4;
     if (showResponse) {
-      const response = botResponses.answer_responses[Math.floor(Math.random()*botResponses.answer_responses.length)];
+      const response = botResponses.answer_responses[Math.floor(Math.random() * botResponses.answer_responses.length)];
       stepResponse = getStepOpenQuestion(stepIndex, response);
       addStep(stepResponse);
       additionalResponses++;
@@ -50,7 +51,7 @@ export const getStepsFromQuestionnaire = () => {
   botResponses.thanks.map((message, index) => {
     stepResponse = getStepOpenQuestion(stepIndex, message);
 
-    if (index === botResponses.thanks.length-1) {
+    if (index === botResponses.thanks.length - 1) {
       delete stepResponse["trigger"];
       stepResponse["end"] = true;
     }
@@ -71,8 +72,8 @@ const addStep = (stepResponse) => {
 };
 
 const getNextStepID = (questionsLength, currentStepIndex) => {
-  const stepsAmount = questionsLength*2+additionalResponses;
-  return currentStepIndex-1 === stepsAmount+botResponses.greetings.length+botResponses.thanks.length ? stepsAmount+botResponses.greetings.length+1 : currentStepIndex+1;
+  const stepsAmount = questionsLength * 2 + additionalResponses;
+  return currentStepIndex - 1 === stepsAmount + botResponses.greetings.length + botResponses.thanks.length ? stepsAmount + botResponses.greetings.length + 1 : currentStepIndex + 1;
 };
 
 const getQuestions = (pages) => {
@@ -100,11 +101,18 @@ const getQuestions = (pages) => {
   return questions;
 };
 
-const getStepOpenQuestion = (id, label) => {
+const getStepOpenQuestion = (id, label, setId) => {
   const step = {
-    id: `${id}`,
-    message: label,
+    id: `${id}`
   };
+
+  if (setId) {
+    step["message"] = `${id-skipSetId}. ${label}`;
+  }
+  else {
+    skipSetId++;
+    step["message"] = label;
+  }
 
   step["trigger"] = `${nextStepID}`;
 
@@ -117,6 +125,8 @@ const getStepCloseQuestion = (id, options) => {
     options
   };
 
+  skipSetId++;
+
   step.options = updateCloseQuestionOptions(options);
 
   return step;
@@ -128,7 +138,9 @@ const getStepAnswer = (id) => {
     user: true
   };
 
-  step["trigger"] = ({ value, steps: currentSteps }) => value === "STOP" ? `${nextStepID}` : `${Object.keys(currentSteps).length+1}`;
+  skipSetId++;
+
+  step["trigger"] = ({ value, steps: currentSteps }) => value === "STOP" ? `${nextStepID}` : `${Object.keys(currentSteps).length + 1}`;
 
   return step;
 };
@@ -139,7 +151,7 @@ const getElementCloseQuestionOptions = (optionGroup) => {
     const option = {
       value: elementOption.value,
       label: elementOption.label,
-      trigger: ``,
+      trigger: ``
     };
 
     options.push(option);

@@ -32,6 +32,7 @@ class Chat extends Component {
 
     const steps = getStepsFromQuestionnaire();
     this.setState({ steps });
+    // this.handleEnd = this.handleEnd.bind(this);
   }
 
   toggleOverlay = () => {
@@ -41,6 +42,12 @@ class Chat extends Component {
   handleEnd = () => {
     setTimeout(() => navigateTo("ThankYou"), 5000);
   };
+
+  // handleEnd({steps, values}){
+  //   for(let i = 0; i < steps.length;i++){
+  //     userResponse.push(`${values[i]}`);
+  //   }
+  // }
 
   render () {
     const { steps } = this.state;
