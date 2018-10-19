@@ -33,5 +33,5 @@ export default (styles = StyleSheet.create({
     height: 50,
     borderRadius: 25,
     elevation: 1
-  }
+  },
 }));
