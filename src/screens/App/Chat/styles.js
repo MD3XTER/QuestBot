@@ -19,8 +19,9 @@ export default (styles = StyleSheet.create({
     backgroundColor: '#8FCAFB'
   },
   overlay: {
-    width: 200,
-    height: 300,
+    borderRadius: 30,
+    minWidth: 250,
+    height: "auto",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",

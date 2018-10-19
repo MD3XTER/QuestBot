@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity, Keyboard } from "react-native";
 import ChatBot from "react-native-chatbot";
-import { Overlay } from 'react-native-elements';
+import { Overlay } from "react-native-elements";
 import logo from "../../../images/logo.png";
 
 import styles from "./styles";
@@ -10,16 +10,18 @@ import { getStepsFromQuestionnaire, navigateTo } from "../../../utils";
 import commonStyles from "../Greeting/styles";
 
 class Chat extends Component {
+
   static navigationOptions = ({ navigation }) => {
     return {
+      title: 'Questbot Survey',
+      headerTitleStyle: {color: '#8FCAFB'},
       headerLeft: null,
       headerRight: (
-        <TouchableOpacity style={ styles.helpButton }
-          onPress={navigation.getParam('toggleOverlay')}
-        >
-          <Text style={{ color: 'white' }} >Help</Text>
+        <TouchableOpacity style={styles.helpButton} onPress={navigation.getParam("toggleOverlay")}>
+          <Text style={{ color: "white" }}>Help</Text>
         </TouchableOpacity>
-    )}
+      )
+    };
   };
 
   state = {
@@ -36,6 +38,7 @@ class Chat extends Component {
   }
 
   toggleOverlay = () => {
+    Keyboard.dismiss();
     this.setState({ showOverlay: !this.state.showOverlay });
   };
 
@@ -49,7 +52,7 @@ class Chat extends Component {
   //   }
   // }
 
-  render () {
+  render() {
     const { steps } = this.state;
 
     return (
@@ -66,11 +69,11 @@ class Chat extends Component {
         <Overlay
           overlayStyle={styles.overlay}
           isVisible={this.state.showOverlay}
-          onBackdropPress={() => this.setState({ showOverlay: false})}
-          borderRadius={30}
+          onBackdropPress={() => this.setState({ showOverlay: false })}
         >
-          <Image style={styles.overlayImage} source={logo} />
-          <Text style={commonStyles.descriptionText}>"If you ever feel like you want to quit, then type STOP in the chat."</Text>
+          <Image style={styles.overlayImage} source={logo}/>
+          <Text style={commonStyles.descriptionText}>"If you ever feel like you want to quit, then type STOP in the
+            chat."</Text>
         </Overlay>
       </View>
     );
@@ -78,7 +81,7 @@ class Chat extends Component {
 }
 
 const mapStateToProps = ({ app }) => {
-  return { steps: app.steps }
+  return { steps: app.steps };
 };
 
 export default connect(
