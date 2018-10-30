@@ -7,7 +7,12 @@ import logo from "../../../images/logo.png";
 import styles from "./styles";
 import commonStyles from "../styles";
 
-import { authTokenChanged, questionnaireChanged } from "../../../modules/actions"
+// import questionnaire from "../../../utils/api_responses";
+
+import {
+  authTokenChanged,
+  questionnaireChanged
+} from "../../../modules/actions";
 import { navigateTo, authentificate, getQuestionnaire } from "../../../utils";
 
 class Greeting extends PureComponent {
@@ -44,5 +49,7 @@ const mapStateToProps = ({ app: { authToken } }) => {
   return { authToken };
 };
 
-export default connect(mapStateToProps, { authTokenChanged, questionnaireChanged })(Greeting);
-
+export default connect(
+  mapStateToProps,
+  { authTokenChanged, questionnaireChanged }
+)(Greeting);

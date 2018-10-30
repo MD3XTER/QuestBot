@@ -7,7 +7,7 @@ let questionsLength;
 let additionalResponses = 0;
 let skipSetId = 0;
 
-export const getStepsFromQuestionnaire = (questionnaire) => {
+export const getStepsFromQuestionnaire = questionnaire => {
   console.log(questionnaire);
 
   const questions = getQuestions(questionnaire.pages);
@@ -17,12 +17,12 @@ export const getStepsFromQuestionnaire = (questionnaire) => {
 
   let stepResponse;
 
-  botResponses.greetings.map((message) => {
+  botResponses.greetings.map(message => {
     stepResponse = getStepOpenQuestion(stepIndex, message);
     addStep(stepResponse);
   });
 
-  questions.map((question) => {
+  questions.map(question => {
     let stepQuestion;
     stepQuestion = getStepOpenQuestion(stepIndex, question.label, true);
     addStep(stepQuestion);
@@ -30,15 +30,19 @@ export const getStepsFromQuestionnaire = (questionnaire) => {
     if (question.options) {
       stepQuestion = getStepCloseQuestion(stepIndex, question.options);
       addStep(stepQuestion);
-    }
-    else {
+    } else {
       const stepAnswer = getStepAnswer(stepIndex);
       addStep(stepAnswer);
     }
 
-    const showResponse = Math.floor(Math.random() * Math.floor(questionsLength)) > 4;
+    const showResponse =
+      Math.floor(Math.random() * Math.floor(questionsLength)) > 4;
+
     if (showResponse) {
-      const response = botResponses.answer_responses[Math.floor(Math.random() * botResponses.answer_responses.length)];
+      const response =
+        botResponses.answer_responses[
+          Math.floor(Math.random() * botResponses.answer_responses.length)
+        ];
       stepResponse = getStepOpenQuestion(stepIndex, response);
       addStep(stepResponse);
       additionalResponses++;
@@ -62,7 +66,7 @@ export const getStepsFromQuestionnaire = (questionnaire) => {
   return steps;
 };
 
-const addStep = (stepResponse) => {
+const addStep = stepResponse => {
   steps.push(stepResponse);
   stepIndex++;
   nextStepID = getNextStepID(questionsLength, stepIndex);
@@ -70,24 +74,29 @@ const addStep = (stepResponse) => {
 
 const getNextStepID = (questionsLength, currentStepIndex) => {
   const stepsAmount = questionsLength * 2 + additionalResponses;
-  return currentStepIndex - 1 === stepsAmount + botResponses.greetings.length + botResponses.thanks.length ? stepsAmount + botResponses.greetings.length + 1 : currentStepIndex + 1;
+  return currentStepIndex - 1 ===
+    stepsAmount + botResponses.greetings.length + botResponses.thanks.length
+    ? stepsAmount + botResponses.greetings.length + 1
+    : currentStepIndex + 1;
 };
 
-const getQuestions = (pages) => {
+export const getQuestions = pages => {
   let questions = [];
 
-  pages.map((page) => {
-    page.elements.map((element) => {
+  pages.map(page => {
+    page.elements.map(element => {
       const question = {};
 
       if (element.type === "question_open") {
         question["label"] = element.label;
-      }
-      else if (element.type === "question_closed") {
+        question["name"] = element.name;
+      } else if (element.type === "question_closed") {
         question["label"] = element.label;
-        question["options"] = getElementCloseQuestionOptions(element.optionGroup);
-      }
-      else {
+        question["name"] = element.name;
+        question["options"] = getElementCloseQuestionOptions(
+          element.optionGroup
+        );
+      } else {
         return false;
       }
 
@@ -104,9 +113,8 @@ const getStepOpenQuestion = (id, label, setId) => {
   };
 
   if (setId) {
-    step["message"] = `${id-skipSetId}. ${label}`;
-  }
-  else {
+    step["message"] = `${id - skipSetId}. ${label}`;
+  } else {
     skipSetId++;
     step["message"] = label;
   }
@@ -119,7 +127,7 @@ const getStepOpenQuestion = (id, label, setId) => {
 const getStepCloseQuestion = (id, options) => {
   const step = {
     id: `${id}`,
-    options,
+    options
   };
 
   skipSetId++;
@@ -129,22 +137,25 @@ const getStepCloseQuestion = (id, options) => {
   return step;
 };
 
-const getStepAnswer = (id) => {
+const getStepAnswer = id => {
   const step = {
     id: `${id}`,
-    user: true,
+    user: true
   };
 
   skipSetId++;
 
-  step["trigger"] = ({ value, steps: currentSteps }) => value === "STOP" ? `${nextStepID}` : `${Object.keys(currentSteps).length + 1}`;
+  step["trigger"] = ({ value, steps: currentSteps }) =>
+    value === "STOP"
+      ? `${nextStepID}`
+      : `${Object.keys(currentSteps).length + 1}`;
 
   return step;
 };
 
-const getElementCloseQuestionOptions = (optionGroup) => {
+const getElementCloseQuestionOptions = optionGroup => {
   const options = [];
-  optionGroup.options.map((elementOption) => {
+  optionGroup.options.map(elementOption => {
     const option = {
       value: elementOption.value,
       label: elementOption.label,
@@ -157,8 +168,8 @@ const getElementCloseQuestionOptions = (optionGroup) => {
   return options;
 };
 
-const updateCloseQuestionOptions = (options) => {
-  return options.map((option) => {
+const updateCloseQuestionOptions = options => {
+  return options.map(option => {
     option.trigger = nextStepID;
     return option;
   });

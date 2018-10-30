@@ -1,0 +1,212 @@
+{
+    "properties": {
+        "label": "Questbot Survey",
+        "progressBar": true,
+        "theme": {
+            "colors": "",
+            "fonts": ""
+        }
+    },
+    "pages": [
+        {
+            "uid": "page1",
+            "properties": {
+                "pageNumber": 0,
+                "readonly": false
+            },
+            "elements": [
+                {
+                    "label": "<h5>Hi there!</h5><div>Welcome to the <b>saxion questbot</b>'s first survey.</div>",
+                    "conditionSets": [],
+                    "readonly": false,
+                    "visible": true,
+                    "required": false,
+                    "lastUpdated": "2018-09-17T12:03:34.696Z",
+                    "placement": "below",
+                    "id": "element-cf094ce3-b45c-4789-327f-315c10f9e43f",
+                    "type": "text_element",
+                    "conditions": [],
+                    "value": "",
+                    "pageIndex": 0,
+                    "index": 0
+                },
+                {
+                    "label": "What is the first thought that comes to mind when you hear the word \"cow\"? ",
+                    "conditionSets": [],
+                    "readonly": false,
+                    "visible": true,
+                    "required": false,
+                    "lastUpdated": "2018-09-17T12:04:43.294Z",
+                    "placement": "below",
+                    "id": "element-c16c3ade-b2d9-31cd-e6ec-e002080a3601",
+                    "type": "question_open",
+                    "datatype": "varchar",
+                    "validation": {
+                        "type": "none"
+                    },
+                    "conditions": [],
+                    "value": "",
+                    "pageIndex": 0,
+                    "index": 1,
+                    "name": "g7kyb3zh9",
+                    "vh": "5d6058fb0b1734a9aaf2525d3cb45216"
+                },
+                {
+                    "label": "What is your general opinion about fish?",
+                    "conditionSets": [],
+                    "readonly": false,
+                    "visible": true,
+                    "required": false,
+                    "lastUpdated": "2018-09-17T12:07:16.547Z",
+                    "placement": "below",
+                    "id": "element-f67bb884-bf14-79c9-bad5-a5ab4387b27e",
+                    "type": "question_closed",
+                    "datatype": "varoption",
+                    "multiple": false,
+                    "layout": "vertical",
+                    "optionGroup": {
+                        "id": "e79283cc-dc27-0a54-a775-473e3be53238",
+                        "name": "GENERATED",
+                        "vogh": "5956bd4eb543b92c3f3003873e1f83e5",
+                        "label": "They disgust me - I wish I was a fish",
+                        "hash": "3efdc1e0-23b8-cca6-87ba-1c4536034220",
+                        "options": [
+                            {
+                                "label": "They disgust me",
+                                "id": "2ca09448-8c24-9222-78cb-9b30081c3575",
+                                "value": "vpzgwa3pp",
+                                "name": "vpzgwa3pp"
+                            },
+                            {
+                                "label": "I could do without them",
+                                "id": "86a59dfe-069e-cec6-0bd7-03ed17292117",
+                                "value": "kx8abw5hy",
+                                "name": "kx8abw5hy"
+                            },
+                            {
+                                "label": "Indiffferent",
+                                "id": "555d49ac-64e3-2c4e-affe-805814c9e98b",
+                                "value": "m5h354zbw",
+                                "name": "m5h354zbw"
+                            },
+                            {
+                                "label": "I could'nt do without them",
+                                "id": "b2c3c8e6-e030-ca79-4d9e-1c1d30bd74cc",
+                                "value": "x6jv4rtj9",
+                                "name": "x6jv4rtj9"
+                            },
+                            {
+                                "label": "I wish I was a fish",
+                                "id": "318a765a-7b20-64db-ee82-0136231ca721",
+                                "value": "ztrxqefw5",
+                                "name": "ztrxqefw5"
+                            }
+                        ]
+                    },
+                    "value": "",
+                    "conditions": [],
+                    "optionGroupOption": "new",
+                    "pageIndex": 0,
+                    "index": 3,
+                    "name": "k9qqeyxjz",
+                    "vh": "88c7f4d1a2de61f675b14763a3af124e"
+                }
+            ]
+        },
+        {
+            "elements": [
+                {
+                    "label": "What is your favorite kind of water?",
+                    "conditionSets": [],
+                    "readonly": false,
+                    "visible": true,
+                    "required": true,
+                    "lastUpdated": "2018-09-17T12:15:43.530Z",
+                    "placement": "below",
+                    "id": "element-75bd723b-9b92-94dc-0a8c-ce3566565ef7",
+                    "type": "question_closed",
+                    "datatype": "varoption",
+                    "multiple": true,
+                    "layout": "vertical",
+                    "optionGroup": {
+                        "id": "6fca206e-325e-4b45-f6b2-ac2fddc66a73",
+                        "name": "GENERATED",
+                        "vogh": "34d288083b44a09aedcd70d106bbd61e",
+                        "label": "Water - Water",
+                        "hash": "8d6b6a32-5426-0afc-32c7-37d1555f8a8b",
+                        "options": [
+                            {
+                                "label": "Water",
+                                "id": "62886bda-6dea-02e2-1482-2e00227a9396",
+                                "value": 1,
+                                "name": "ejy5n5bx9"
+                            },
+                            {
+                                "label": "Water",
+                                "id": "a244e28d-7e56-4550-3b82-2f53b73f632f",
+                                "value": 2,
+                                "name": "hv9mhavh3"
+                            },
+                            {
+                                "label": "Water",
+                                "id": "b7eee686-0d84-f4e6-036e-6d4a27543da9",
+                                "value": 3,
+                                "name": "xm6twerr6"
+                            },
+                            {
+                                "label": "Water",
+                                "id": "554c02b0-2cc9-a38f-c085-997edb355d38",
+                                "value": 4,
+                                "name": "jwqk763ys"
+                            },
+                            {
+                                "label": "Water",
+                                "id": "11fb7d59-384d-a23e-f512-dfe9391bc4a2",
+                                "value": 5,
+                                "name": "87ffaamgn"
+                            },
+                            {
+                                "label": "Water",
+                                "id": "397029e2-5f82-2a5d-3cfb-9d07e3d19fc7",
+                                "value": 6,
+                                "name": "qdr22mgvf"
+                            }
+                        ]
+                    },
+                    "value": [],
+                    "conditions": [],
+                    "optionGroupOption": "new",
+                    "pageIndex": 1,
+                    "index": 1,
+                    "name": "qh5qd3fs6",
+                    "vh": "dc0c2cc1db9164b06738acc1241a1be3"
+                },
+                {
+                    "label": "How do you swim to school?",
+                    "conditionSets": [],
+                    "readonly": false,
+                    "visible": true,
+                    "required": false,
+                    "lastUpdated": "2018-09-17T12:16:25.600Z",
+                    "placement": "below",
+                    "id": "element-b26d803f-8f89-f53b-05de-2071f0629216",
+                    "type": "question_open",
+                    "datatype": "varchar",
+                    "validation": {
+                        "type": "none"
+                    },
+                    "conditions": [],
+                    "pageIndex": 1,
+                    "index": 2,
+                    "name": "nwv7zr7nq",
+                    "vh": "8a5809116b8a6c32219b148b52cc1706"
+                }
+            ],
+            "uid": "f272c4e2-3a56-a827-f365-c90035777d41",
+            "properties": {
+                "pageNumber": 2,
+                "readOnly": false
+            }
+        }
+    ]
+}

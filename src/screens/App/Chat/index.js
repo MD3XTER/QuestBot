@@ -11,7 +11,11 @@ import ImageLoader from "./ImageLoader";
 import styles from "./styles";
 import commonStyles from "../styles";
 
-import { getStepsFromQuestionnaire, navigateTo } from "../../../utils";
+import {
+  getStepsFromQuestionnaire,
+  navigateTo,
+  getQuestions
+} from "../../../utils";
 
 class Chat extends PureComponent {
   static navigationOptions = ({ navigation }) => {
@@ -20,7 +24,10 @@ class Chat extends PureComponent {
       headerTitleStyle: { color: "#8FCAFB" },
       headerLeft: null,
       headerRight: (
-        <TouchableOpacity style={styles.helpButton} onPress={navigation.getParam("toggleOverlay")}>
+        <TouchableOpacity
+          style={styles.helpButton}
+          onPress={navigation.getParam("toggleOverlay")}
+        >
           <Text style={{ color: "white" }}>Help</Text>
         </TouchableOpacity>
       )
@@ -46,17 +53,21 @@ class Chat extends PureComponent {
     this.setState({ showOverlay: !this.state.showOverlay });
   };
 
-  handleEnd = () => {
+  handleEnd = ({ values }) => {
+    const { questionnaire } = this.props;
+
+    const questions = getQuestions(questionnaire.pages);
+    console.log(values);
+
     setTimeout(() => navigateTo("ThankYou"), 5000);
   };
-
 
   render() {
     const { steps } = this.state;
 
     return (
       <View style={styles.container}>
-        { steps.length > 0 && (
+        {steps.length > 0 && (
           <ChatBot
             handleEnd={this.handleEnd}
             steps={steps}
@@ -73,10 +84,10 @@ class Chat extends PureComponent {
           isVisible={this.state.showOverlay}
           onBackdropPress={() => this.setState({ showOverlay: false })}
         >
-          <ImageLoader style={styles.overlayImage} source={logo}/>
+          <ImageLoader style={styles.overlayImage} source={logo} />
 
           <Text style={[commonStyles.descriptionText, { marginBottom: 0 }]}>
-            If you ever feel like you want to quit, then type STOP in the chat.
+            If you ever feel like you want to quit, then type /STOP in the chat.
           </Text>
         </Overlay>
       </View>

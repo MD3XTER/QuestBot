@@ -1,9 +1,9 @@
 {
   "greetings": [
-    "Hello there, welcome to QuestBot!",
-//    "I hope you are feeling alive and well, I myself am all charged up!",
-    "I will be asking you some questions, if you ever feel like you want to quit, then type STOP.",
-    "Ok, here comes the first question: 😉"
+    "Hello there! Welcome to QuestBot!",
+    "My name is Biotronic Operational Telecommunicator, but you can call me BOT 😀",
+    "I would like to ask you some questions, if you have the time. If at any time you feel like you want to quit, just type STOP.",
+    "Alright! Here comes the first question: 😉"
   ],
   "answer_responses": [
     "Take your time, there is no rush!",
@@ -11,9 +11,14 @@
     "I have to say, you’re very nice to talk to 😀",
     "Let’s keep going!",
     "We’re making some nice progress 🙃",
-    "This is so fun, I love talking to you 😊"
+    "Hmm, I see...",
+    "You're quite an interesting person! 😀",
+    "I appreciate your honesty.",
+    "The more I learn about you, the more I start liking you! 😀"
   ],
   "thanks": [
-    "It was a pleasure talking with you, have a good one! 🤗"
+    "Well, these were all of the questions I had.",
+    "Thank you! It was a pleasure talking with you!",
+    "Hope you have a nice day! 🤗"
   ]
 }
