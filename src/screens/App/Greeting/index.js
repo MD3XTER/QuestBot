@@ -4,17 +4,19 @@ import { Button } from "react-native-elements";
 
 import logo from "../../../images/logo.png";
 import styles from "./styles";
+
+import commonStyles from "../styles";
 import { navigateTo } from "../../../utils";
 
 export default class Greeting extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.mainText}>Welcome to QuestBot</Text>
+      <View style={commonStyles.container}>
+        <Text style={commonStyles.mainText}>Welcome to QuestBot</Text>
 
-        <Image style={styles.logo} source={logo} />
+        <Image style={commonStyles.logo} source={logo} />
 
-        <Text style={styles.descriptionText}>
+        <Text style={commonStyles.descriptionText}>
           "Here you can answer questions and you get to talk with me!"
         </Text>
 

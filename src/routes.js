@@ -2,11 +2,6 @@ import { createStackNavigator, createSwitchNavigator } from "react-navigation";
 import Greeting from "./screens/App/Greeting";
 import Chat from "./screens/App/Chat";
 import ThankYou from "./screens/App/ThankYou";
-import AppLoadingScreen from "./screens/App/ThankYou/index";
-import { Button } from "react-native-elements";
-import styles from "./screens/App/Chat/styles";
-import ChatBot from "react-native-chatbot";
-import React from "react";
 
 const AppStack = createStackNavigator(
   {
@@ -18,9 +13,6 @@ const AppStack = createStackNavigator(
     },
     Chat: {
       screen: Chat,
-      navigationOptions: () => ({
-        // header: null
-      }),
     },
     ThankYou: {
       screen: ThankYou,
@@ -30,13 +22,12 @@ const AppStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: "Greeting",
+    initialRouteName: "Chat",
   }
 );
 
 const RootNavigator = createSwitchNavigator(
   {
-    // AppLoading: AppLoadingScreen,
     App: AppStack
   },
   {

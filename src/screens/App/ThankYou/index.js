@@ -6,7 +6,8 @@ import mihaiAvatar from "../../../images/mihai.jpg";
 import armindaAvatar from "../../../images/arminda.jpg";
 import andreiAvatar from "../../../images/andrei.jpg";
 import maxAvatar from "../../../images/max.jpg";
-import commonStyles from "../Greeting/styles";
+
+import commonStyles from "../styles";
 import styles from "./styles";
 
 export default class ThankYou extends Component {

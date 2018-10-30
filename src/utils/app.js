@@ -1,9 +1,6 @@
-import apiResponse from "./api_response";
 import botResponses from "./bot_responses";
-import { navigateTo } from "./navigation";
 
 export let steps = [];
-export let userResponses = [];
 let nextStepID;
 let stepIndex = 1;
 let questionsLength;

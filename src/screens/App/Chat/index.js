@@ -1,55 +1,19 @@
 import React, { Component } from "react";
+import { View, Text, TouchableOpacity, Keyboard } from "react-native";
 import { connect } from "react-redux";
-import { View, Text, Image, TouchableOpacity, Keyboard, Animated } from "react-native";
 import ChatBot from "react-native-chatbot";
 import { Overlay } from "react-native-elements";
+
 import logo from "../../../images/logo.png";
 
+import ImageLoader from "./ImageLoader";
+
 import styles from "./styles";
+import commonStyles from "../styles";
 
 import { getStepsFromQuestionnaire, navigateTo } from "../../../utils";
-import commonStyles from "../Greeting/styles";
-
-class ImageLoader extends Component {
-  state = {
-    opacity: new Animated.Value(0),
-  };
-
-  onLoad = () => {
-    Animated.timing(this.state.opacity, {
-      toValue: 1,
-      duration: 500,
-      useNativeDriver: true
-    }).start();
-  };
-
-  render() {
-    return (
-      <Animated.Image
-        onLoad={this.onLoad}
-        {...this.props}
-        style={[
-          {
-            opacity: this.state.opacity,
-            transform: [
-              {
-                scale: this.state.opacity.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0.85, 1]
-                })
-              }
-
-            ]
-          },
-          this.props.style
-        ]}
-      />
-    );
-  }
-}
 
 class Chat extends Component {
-
   static navigationOptions = ({ navigation }) => {
     return {
       title: "Questbot Survey",
@@ -73,7 +37,6 @@ class Chat extends Component {
 
     const steps = getStepsFromQuestionnaire();
     this.setState({ steps });
-     this.handleEnd = this.handleEnd.bind(this);
   }
 
   toggleOverlay = () => {
@@ -90,7 +53,7 @@ class Chat extends Component {
     const { steps } = this.state;
 
     return (
-      <View style={styles.mainContainer}>
+      <View style={styles.container}>
         <ChatBot
           handleEnd={this.handleEnd}
           steps={steps}
@@ -98,8 +61,9 @@ class Chat extends Component {
           userAvatar="https://i.imgur.com/7DEThbw.jpg"
           botBubbleColor="#8FCAFF"
           userBubbleColor="rgba(0,0,0,0.1)"
-          contentStyle={styles.container}
+          contentStyle={styles.chatScreen}
         />
+
         <Overlay
           overlayStyle={styles.overlay}
           isVisible={this.state.showOverlay}
@@ -107,7 +71,7 @@ class Chat extends Component {
         >
           <ImageLoader style={styles.overlayImage} source={logo}/>
 
-          <Text style={commonStyles.descriptionText}>
+          <Text style={[commonStyles.descriptionText, { marginBottom: 0 }]}>
             If you ever feel like you want to quit, then type STOP in the chat.
           </Text>
         </Overlay>
