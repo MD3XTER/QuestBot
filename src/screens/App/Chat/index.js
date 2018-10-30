@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { View, Text, TouchableOpacity, Keyboard } from "react-native";
 import { connect } from "react-redux";
 import ChatBot from "react-native-chatbot";
@@ -13,7 +13,7 @@ import commonStyles from "../styles";
 
 import { getStepsFromQuestionnaire, navigateTo } from "../../../utils";
 
-class Chat extends Component {
+class Chat extends PureComponent {
   static navigationOptions = ({ navigation }) => {
     return {
       title: "Questbot Survey",
@@ -32,10 +32,12 @@ class Chat extends Component {
     showOverlay: false
   };
 
-  componentWillMount() {
+  async componentWillMount() {
+    const { questionnaire } = this.props;
+
     this.props.navigation.setParams({ toggleOverlay: this.toggleOverlay });
 
-    const steps = getStepsFromQuestionnaire();
+    const steps = getStepsFromQuestionnaire(questionnaire);
     this.setState({ steps });
   }
 
@@ -54,15 +56,17 @@ class Chat extends Component {
 
     return (
       <View style={styles.container}>
-        <ChatBot
-          handleEnd={this.handleEnd}
-          steps={steps}
-          botAvatar="https://i.imgur.com/XnqSldH.png"
-          userAvatar="https://i.imgur.com/7DEThbw.jpg"
-          botBubbleColor="#8FCAFF"
-          userBubbleColor="rgba(0,0,0,0.1)"
-          contentStyle={styles.chatScreen}
-        />
+        { steps.length > 0 && (
+          <ChatBot
+            handleEnd={this.handleEnd}
+            steps={steps}
+            botAvatar="https://i.imgur.com/XnqSldH.png"
+            userAvatar="https://i.imgur.com/7DEThbw.jpg"
+            botBubbleColor="#8FCAFF"
+            userBubbleColor="rgba(0,0,0,0.1)"
+            contentStyle={styles.chatScreen}
+          />
+        )}
 
         <Overlay
           overlayStyle={styles.overlay}
@@ -80,11 +84,8 @@ class Chat extends Component {
   }
 }
 
-const mapStateToProps = ({ app }) => {
-  return { steps: app.steps };
+const mapStateToProps = ({ app: { questionnaire } }) => {
+  return { questionnaire };
 };
 
-export default connect(
-  mapStateToProps,
-  {}
-)(Chat);
+export default connect(mapStateToProps)(Chat);

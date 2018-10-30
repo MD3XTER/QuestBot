@@ -1,16 +1,16 @@
 import botResponses from "./bot_responses";
 
-export let steps = [];
+let steps = [];
 let nextStepID;
 let stepIndex = 1;
 let questionsLength;
 let additionalResponses = 0;
 let skipSetId = 0;
 
-export const getStepsFromQuestionnaire = () => {
-  console.log(apiResponse);
+export const getStepsFromQuestionnaire = (questionnaire) => {
+  console.log(questionnaire);
 
-  const questions = getQuestions(apiResponse.pages);
+  const questions = getQuestions(questionnaire.pages);
   questionsLength = questions.length;
 
   nextStepID = getNextStepID(questions.length, stepIndex);

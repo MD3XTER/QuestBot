@@ -20,7 +20,7 @@ export default (styles = StyleSheet.create({
     backgroundColor: '#8FCAFB'
   },
   overlay: {
-    marginTop: -75,
+    marginTop: -100,
     borderRadius: 15,
     height: "auto",
     justifyContent: "center",

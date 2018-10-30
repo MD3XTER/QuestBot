@@ -1,14 +1,24 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
 import { View, Text, Image } from "react-native";
 import { Button } from "react-native-elements";
 
 import logo from "../../../images/logo.png";
 import styles from "./styles";
-
 import commonStyles from "../styles";
-import { navigateTo } from "../../../utils";
 
-export default class Greeting extends Component {
+import { authTokenChanged, questionnaireChanged } from "../../../modules/actions"
+import { navigateTo, authentificate, getQuestionnaire } from "../../../utils";
+
+class Greeting extends PureComponent {
+  async componentWillMount() {
+    const authToken = await authentificate();
+    this.props.authTokenChanged(authToken);
+
+    const questionnaire = await getQuestionnaire(authToken);
+    this.props.questionnaireChanged(questionnaire);
+  }
+
   render() {
     return (
       <View style={commonStyles.container}>
@@ -29,3 +39,10 @@ export default class Greeting extends Component {
     );
   }
 }
+
+const mapStateToProps = ({ app: { authToken } }) => {
+  return { authToken };
+};
+
+export default connect(mapStateToProps, { authTokenChanged, questionnaireChanged })(Greeting);
+
