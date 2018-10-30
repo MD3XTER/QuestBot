@@ -40,7 +40,7 @@ class Chat extends Component {
   };
 
   handleEnd = () => {
-    setTimeout(() => navigateTo("ThankYou"), 5000);
+    // setTimeout(() => navigateTo("ThankYou"), 5000);
   };
 
   // handleEnd({steps, values}){

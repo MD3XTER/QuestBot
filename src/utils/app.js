@@ -2,6 +2,9 @@ import apiResponse from "./api_response";
 import botResponses from "./bot_responses";
 import { navigateTo } from "./navigation";
 
+import React from "react";
+import SummaryForm from "../components/SummaryForm";
+
 let steps = [];
 export let userResponse = [];
 let nextStepID;
@@ -9,6 +12,12 @@ let stepIndex = 1;
 let questionsLength;
 let additionalResponses = 0;
 let skipSetId = 0;
+
+const getOpenQuestions = (steps) => {
+  const findOpenQuestion = /^[0-9]+. /;
+
+  return steps.filter(step => step.message && step.message.match(findOpenQuestion));
+};
 
 export const getStepsFromQuestionnaire = () => {
   console.log(apiResponse);
@@ -48,6 +57,50 @@ export const getStepsFromQuestionnaire = () => {
     }
   });
 
+  let reviewQuestion = {
+    id: stepIndex,
+    message: botResponses.review[0],
+    trigger: nextStepID
+  };
+  addStep(reviewQuestion);
+
+  const reviewStep = {
+    id: stepIndex,
+    component: <SummaryForm />,
+    trigger: nextStepID
+  };
+  addStep(reviewStep);
+
+  reviewQuestion = {
+    id: stepIndex,
+    message: botResponses.review[0],
+    trigger: nextStepID
+  };
+  addStep(reviewQuestion);
+
+  reviewQuestion = {
+    id: stepIndex,
+    options: [
+      { value: 'yes', label: 'Yes', trigger: 'update-yes' },
+      { value: 'no', label: 'No', trigger: nextStepID },
+    ],
+  };
+  addStep(reviewQuestion);
+
+  reviewQuestion = {
+    id: "update-yes",
+    message: 'What field would you like to update?',
+    trigger: 'update-fields',
+  };
+  addStep(reviewQuestion);
+
+  reviewQuestion = {
+    id: "update-no",
+    message: 'What field would you like to update?',
+    trigger: 'update-fields',
+  };
+  addStep(reviewQuestion);
+
   botResponses.thanks.map((message, index) => {
     stepResponse = getStepOpenQuestion(stepIndex, message);
 
@@ -65,8 +118,8 @@ export const getStepsFromQuestionnaire = () => {
   return steps;
 };
 
-const addStep = (stepResponse) => {
-  steps.push(stepResponse);
+const addStep = (step) => {
+  steps.push(step);
   stepIndex++;
   nextStepID = getNextStepID(questionsLength, stepIndex);
 };

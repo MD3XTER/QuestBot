@@ -17,10 +17,7 @@ const AppStack = createStackNavigator(
       })
     },
     Chat: {
-      screen: Chat,
-      navigationOptions: () => ({
-        // header: null
-      }),
+      screen: Chat
     },
     ThankYou: {
       screen: ThankYou,
@@ -30,7 +27,7 @@ const AppStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: "Greeting",
+    initialRouteName: "Chat",
   }
 );
 
