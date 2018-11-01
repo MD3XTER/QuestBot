@@ -87,7 +87,7 @@ class Chat extends PureComponent {
           <ImageLoader style={styles.overlayImage} source={logo} />
 
           <Text style={[commonStyles.descriptionText, { marginBottom: 0 }]}>
-            If you ever feel like you want to quit, then type /STOP in the chat.
+            If you ever feel like you want to quit, then type STOP in the chat.
           </Text>
         </Overlay>
       </View>
